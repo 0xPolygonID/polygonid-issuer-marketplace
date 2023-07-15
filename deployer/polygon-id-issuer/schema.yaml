@@ -1,0 +1,85 @@
+x-google-marketplace:
+  schemaVersion: v2
+
+  applicationApiVersion: v1beta1
+
+  publishedVersion: '1.0.0'
+  publishedVersionMetadata:
+    releaseNote: >-
+      Initial Release of Polygon  ID Issuer
+    releaseTypes:
+      - Feature
+    recommended: false
+
+  images:
+    issuernode:
+      properties:
+        apiIssuerNode.deployment.image.repository:
+          type: REPO_WITH_REGISTRY
+        AppVersion:
+          type: TAG
+    issuernode-ui:
+      properties:
+        uiIssuerNode.deployment.image.repository:
+          type: REPO_WITH_REGISTRY
+        AppVersion:
+          type: TAG
+    postgres14:
+      properties:
+        postgresIssuerNode.deployment.image.repository:
+          type: REPO_WITH_REGISTRY
+        AppVersion:
+          type: TAG
+    redis:
+      properties:
+        redisIssuerNode.deployment.image.repository:
+          type: REPO_WITH_REGISTRY
+        AppVersion:
+          type: TAG
+    vault:
+      properties:
+        vaultIssuerNode.deployment.vault.image.repository:
+          type: REPO_WITH_REGISTRY
+        AppVersion:
+          type: TAG
+
+properties:
+  name:                   
+    type: string
+    x-google-marketplace:
+      type: NAME
+  namespace:              
+    type: string
+    default: default
+    x-google-marketplace:
+      type: NAMESPACE
+  appdomain:
+    type: string
+    title: APP Domain Name
+    description: Domain Name for the APP
+  uidomain:
+    type: string
+    title: UI Domain Name
+    description: Domain Name for the UI
+  privatekey:
+    type: string
+    title: Wallet Private Key
+    description: Provide the private key of the wallet
+    x-google-marketplace:
+      type: MASKED_FIELD
+  staticip:
+    type: string
+    title: Reserved Static IP Name
+    description: Static IP for Ingress
+  ingress.enabled:
+    type: boolean
+    default: true
+    x-google-marketplace:
+      type: INGRESS_AVAILABLE
+
+required:
+- name
+- namespace
+- privatekey
+- appdomain
+- uidomain

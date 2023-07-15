@@ -1,0 +1,15 @@
+properties:
+  privatekey:
+    type: string
+    length: 128
+    default: 456518e1eedec0dcbb850133312d4f7108b1b0b9c3eb9bf05092b13674674929
+    x-google-marketplace:
+      type: MASKED_FIELD
+  appdomain:
+    type: string
+    default: app.example.com
+  uidomain:
+    type: string
+    default: ui.example.com
+  staticip:
+    type: string

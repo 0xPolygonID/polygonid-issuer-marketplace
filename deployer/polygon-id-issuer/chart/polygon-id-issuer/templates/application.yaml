@@ -1,0 +1,41 @@
+apiVersion: app.k8s.io/v1beta1
+kind: Application
+metadata:
+  name: "{{ .Release.Name }}"
+  annotations:
+    kubernetes-engine.cloud.google.com/icon: >-
+      data:image/png;base64,{{ .Files.Get "logo.png" | b64enc }}
+    marketplace.cloud.google.com/deploy-info: '{"partner_id": "polygon", "product_id": {{ .Chart.Name | quote }}, "partner_name": "polygon"}'
+  labels:
+    app.kubernetes.io/name: "{{ .Release.Name }}"
+spec:
+  descriptor:
+    type: "Polygon"
+    version: '1.0.0'
+    description: |-
+      Kubernetes based installation for the Polygon ID Issuer Node powered by Polygon.
+    maintainers:
+    - name: Polygon
+      url: https://polygon.technology/polygon-id
+    links:
+    - description: 'Official documentation for the GCP offering of Polygon ID Issuer Node'
+      url: https://0xpolygonid.github.io/tutorials/issuer-node/getting-started-flow/
+    notes: |-
+      Post Installation, Browse to the Ingress (app-ingress or ui-ingress) and click on the ip address uner the 'Routes'.
+      
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: "{{ .Release.Name }}"
+  componentKinds:
+  - group: apps/v1
+    kind: Deployment
+  - group: v1
+    kind: ConfigMap
+  - group: v1
+    kind: Secret
+  - group: v1
+    kind: Service
+  - group: v1
+    kind: PersistentVolumeClaim
+  - group: networking.k8s.io
+    kind: Ingress
