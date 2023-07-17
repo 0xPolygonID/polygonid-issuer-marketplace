@@ -43,7 +43,7 @@ gcloud auth configure-docker
 
 ## Create a Google Kubernetes Engine cluster
 
-If you have an existing GKE cluster you can use that otherwise you can create a new cluster from the command line:
+If you have an existing GKE cluster you can use that otherwise you can create a new cluster from the command line.
 
 ```shell
 export CLUSTER=YOUR_CLUSTER_NAME
@@ -51,7 +51,7 @@ export PROJECT=YOUR_PROJECT_ID
 export REGION=YOUR_REGION
 export ZONE=YOUR_ZONE
 
-gcloud container clusters create $CLUSTER --workload-pool=$PROJECT.svc.id.goog --workload-metadata=GKE_METADATA --machine-type=custom-6-25600 --region=$REGION --total-min-nodes=2
+gcloud container clusters create $CLUSTER --region=$REGION --project $PROJECT
 ```
 
 
@@ -60,12 +60,13 @@ Configure `kubectl` to connect to the new cluster.
   ```shell
   gcloud container clusters get-credentials $CLUSTER --region=$REGION --project $PROJECT
   ``` 
-  For zonal clusters, use --zone=ZONE.
+  For zonal clusters, use --zone=ZONE instead of --region=REGION.
 
 #### Clone this repo and the associated tools repo.
 
 ```shell
-git clone https://github.com/0xPolygonID/polygonid-issuer-marketplace 
+git clone https://github.com/0xPolygonID/polygonid-issuer-marketplace
+cd polygonid-issuer-marketplace
 ```
 
 #### Install the Application resource definition
@@ -95,7 +96,7 @@ export APP_INSTANCE_NAME=polygon-id-issuer  #Sample name for the application
 export NAMESPACE=default. #Namespace where you want to deploy the application
 ```
 
-#### Set the values for the domains where you want to access to your application and privatekey
+#### Set the values for the domains where you want to access to your application and privatekey,static IP.
 
 ```shell
 export APP_DOMAIN=app.example.com #Domain for the API
@@ -114,6 +115,7 @@ helm install "$APP_INSTANCE_NAME" chart/polygon-id-issuer \
   --set privatekey="$PRIVATE_KEY" \
   --set staticip="$STATIC_IP"
 ```
+Remove the `--set staticip="$STATIC_IP"` if you don't have static IP; ingress resource will automatically creates an IP address.
 
 # Using the app
 
