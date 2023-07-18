@@ -17,6 +17,39 @@ spec:
         {{- include "polygon-id-issuer.notificationsIssuerNode.Labels" . | nindent 8 }}
         {{- include "polygon-id-issuer.selectorLabels" . | nindent 8 }}
     spec:
+      initContainers:
+        - name: {{ .Values.notificationsIssuerNode.deployment.init.vault.containerName }}
+          image: {{ .Values.notificationsIssuerNode.deployment.init.vault.image.repository }}:{{ .Values.notificationsIssuerNode.deployment.init.vault.image.tag }}
+          imagePullPolicy: {{ .Values.notificationsIssuerNode.deployment.init.vault.imagePullPolicy | quote }}
+          env:
+          - name: {{ include "helpers.issuer-db-url" .}}
+            value: {{ quote .Values.notificationsIssuerNode.deployment.init.vault.env.issuerDatabaseUrl }}
+          - name: {{ include "helpers.issuer-key-store-addr" .}}
+            value: {{ quote .Values.notificationsIssuerNode.deployment.init.vault.env.issuerKeyStoreAddress }}
+          envFrom:
+          - configMapRef:
+              name: {{ .Values.notificationsIssuerNode.deployment.init.vault.apiconfigMapRef }}
+          - configMapRef:
+              name: {{ .Values.notificationsIssuerNode.deployment.init.vault.apiconfigMapRef }}
+          args: {{ .Values.notificationsIssuerNode.deployment.init.vault.args }}
+          command: {{ .Values.notificationsIssuerNode.deployment.init.vault.command }}
+          volumeMounts: {{- toYaml .Values.notificationsIssuerNode.deployment.init.vault.volumeMounts | nindent 10 }}            
+        - name: {{ .Values.notificationsIssuerNode.deployment.init.did.containerName }}
+          image: {{ .Values.notificationsIssuerNode.deployment.init.did.image.repository }}:{{ .Values.notificationsIssuerNode.deployment.init.did.image.tag }}
+          imagePullPolicy: {{ .Values.notificationsIssuerNode.deployment.init.did.imagePullPolicy | quote }}
+          env:
+          - name: {{ include "helpers.issuer-db-url" .}}
+            value: {{ quote .Values.notificationsIssuerNode.deployment.init.did.env.issuerDatabaseUrl }}
+          - name: {{ include "helpers.issuer-key-store-addr" .}}
+            value: {{ quote .Values.notificationsIssuerNode.deployment.init.did.env.issuerKeyStoreAddress }}
+          envFrom:
+          - configMapRef:
+              name: {{ .Values.notificationsIssuerNode.deployment.init.did.apiconfigMapRef }}
+          - configMapRef:
+              name: {{ .Values.notificationsIssuerNode.deployment.init.did.apiconfigMapRef }}
+          args: {{ .Values.notificationsIssuerNode.deployment.init.did.args }}
+          command: {{ .Values.notificationsIssuerNode.deployment.init.did.command }}
+          volumeMounts: {{- toYaml .Values.notificationsIssuerNode.deployment.did.vault.volumeMounts | nindent 10 }}            
       containers:
         - name: {{ .Values.notificationsIssuerNode.deployment.containerName }}
           image: {{ .Values.notificationsIssuerNode.deployment.image.repository }}:{{ .Values.notificationsIssuerNode.deployment.image.tag }}

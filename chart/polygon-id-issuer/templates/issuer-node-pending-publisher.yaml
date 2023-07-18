@@ -17,6 +17,41 @@ spec:
         {{- include "polygon-id-issuer.pendingPublisherIssuerNode.Labels" . | nindent 8 }}
         {{- include "polygon-id-issuer.selectorLabels" . | nindent 8 }}
     spec:
+      initContainers:
+        - name: {{ .Values.pendingPublisherIssuerNode.deployment.init.vault.containerName }}
+          image: {{ .Values.pendingPublisherIssuerNode.deployment.init.vault.image.repository }}:{{ .Values.pendingPublisherIssuerNode.deployment.init.vault.image.tag }}
+          imagePullPolicy: {{ .Values.pendingPublisherIssuerNode.deployment.init.vault.imagePullPolicy | quote }}
+          env:
+          - name: {{ include "helpers.issuer-db-url" .}}
+            value: {{ quote .Values.pendingPublisherIssuerNode.deployment.init.vault.env.issuerDatabaseUrl }}
+          - name: {{ include "helpers.issuer-key-store-addr" .}}
+            value: {{ quote .Values.pendingPublisherIssuerNode.deployment.init.vault.env.issuerKeyStoreAddress }}
+          envFrom:
+          - configMapRef:
+              name: {{ .Values.pendingPublisherIssuerNode.deployment.init.vault.apiconfigMapRef }}
+          - configMapRef:
+              name: {{ .Values.pendingPublisherIssuerNode.deployment.init.vault.apiconfigMapRef }}
+          args: {{ .Values.pendingPublisherIssuerNode.deployment.init.vault.args }}
+          command: {{ .Values.pendingPublisherIssuerNode.deployment.init.vault.command }}
+          volumeMounts: {{- toYaml .Values.pendingPublisherIssuerNode.deployment.init.vault.volumeMounts | nindent 10 }}            
+        
+        - name: {{ .Values.pendingPublisherIssuerNode.deployment.init.did.containerName }}
+          image: {{ .Values.pendingPublisherIssuerNode.deployment.init.did.image.repository }}:{{ .Values.pendingPublisherIssuerNode.deployment.init.did.image.tag }}
+          imagePullPolicy: {{ .Values.pendingPublisherIssuerNode.deployment.init.did.imagePullPolicy | quote }}
+          env:
+          - name: {{ include "helpers.issuer-db-url" .}}
+            value: {{ quote .Values.pendingPublisherIssuerNode.deployment.init.did.env.issuerDatabaseUrl }}
+          - name: {{ include "helpers.issuer-key-store-addr" .}}
+            value: {{ quote .Values.pendingPublisherIssuerNode.deployment.init.did.env.issuerKeyStoreAddress }}
+          envFrom:
+          - configMapRef:
+              name: {{ .Values.pendingPublisherIssuerNode.deployment.init.did.apiconfigMapRef }}
+          - configMapRef:
+              name: {{ .Values.pendingPublisherIssuerNode.deployment.init.did.apiconfigMapRef }}
+          args: {{ .Values.pendingPublisherIssuerNode.deployment.init.did.args }}
+          command: {{ .Values.pendingPublisherIssuerNode.deployment.init.did.command }}
+          volumeMounts: {{- toYaml .Values.pendingPublisherIssuerNode.deployment.did.vault.volumeMounts | nindent 10 }}            
+
       containers:
         - name: {{ .Values.pendingPublisherIssuerNode.deployment.containerName }}
           image: {{ .Values.pendingPublisherIssuerNode.deployment.image.repository }}:{{ .Values.pendingPublisherIssuerNode.deployment.image.tag }}

@@ -39,3 +39,18 @@ spec:
               port:
                 number: {{ .servicePort }}
           {{- end }}
+
+
+  # this is the new entry.
+  - host: {{ .Values.apidomain }}
+    http:
+      paths:
+        {{- range .Values.ingress.apihost.paths }}
+        - path: {{ .path }}
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ .serviceName }}
+              port:
+                number: {{ .servicePort }}
+          {{- end }}

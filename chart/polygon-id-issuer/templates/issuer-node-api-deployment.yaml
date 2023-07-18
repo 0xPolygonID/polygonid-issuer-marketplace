@@ -17,6 +17,23 @@ spec:
         {{- include "polygon-id-issuer.apiIssuerNode.Labels" . | nindent 8 }}
         {{- include "polygon-id-issuer.selectorLabels" . | nindent 8 }}
     spec:
+      initContainers:
+        - name: {{ .Values.apiIssuerNode.deployment.init.containerName }}
+          image: {{ .Values.apiIssuerNode.deployment.init.image.repository }}:{{ .Values.apiIssuerNode.deployment.init.image.tag }}
+          imagePullPolicy: {{ .Values.apiIssuerNode.deployment.init.imagePullPolicy | quote }}
+          env:
+          - name: {{ include "helpers.issuer-db-url" .}}
+            value: {{ quote .Values.apiIssuerNode.deployment.init.env.issuerDatabaseUrl }}
+          - name: {{ include "helpers.issuer-key-store-addr" .}}
+            value: {{ quote .Values.apiIssuerNode.deployment.init.env.issuerKeyStoreAddress }}
+          envFrom:
+          - configMapRef:
+              name: {{ .Values.apiIssuerNode.deployment.init.apiconfigMapRef }}
+          - configMapRef:
+              name: {{ .Values.apiIssuerNode.deployment.init.apiconfigMapRef }}
+          args: {{ .Values.apiIssuerNode.deployment.init.args }}
+          command: {{ .Values.apiIssuerNode.deployment.init.command }}
+          volumeMounts: {{- toYaml .Values.apiIssuerNode.deployment.init.volumeMounts | nindent 10 }}        
       containers:
         - name: {{ .Values.apiIssuerNode.deployment.containerName }}
           image: {{ .Values.apiIssuerNode.deployment.image.repository }}:{{ .Values.apiIssuerNode.deployment.image.tag }}

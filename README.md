@@ -4,11 +4,9 @@ Polygon ID issuer refers to the entity responsible for issuing unique identifier
 
 To learn more about Polygon ID issuer, see [this](https://0xpolygonid.github.io/tutorials/issuer/issuer-overview).
 
-
-## Architecture 
+## Architecture
 
 ![Architecture diagram](resources/polygon-id-issuer-k8s-app-architecture.png)
-
 
 # Installation
 
@@ -23,17 +21,17 @@ workstation to complete the following steps.
 
 [![Open in Cloud Shell](http://gstatic.com/cloudssh/images/open-btn.svg)](https://console.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/0xPolygonID/polygonid-issuer-marketplace&cloudshell_open_in_editor=README.md)
 
-
 ### Prerequisites
 
 #### Set up command-line tools
-Make sure you have these tools installed.
--   [gcloud](https://cloud.google.com/sdk/gcloud/)
--   [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/)
--   [docker](https://docs.docker.com/install/)
--   [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
--   [helm](https://helm.sh/)
 
+Make sure you have these tools installed.
+
+- [gcloud](https://cloud.google.com/sdk/gcloud/)
+- [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/)
+- [docker](https://docs.docker.com/install/)
+- [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+- [helm](https://helm.sh/)
 
 Configure `gcloud` as a Docker credential helper:
 
@@ -54,13 +52,13 @@ export ZONE=YOUR_ZONE
 gcloud container clusters create $CLUSTER --region=$REGION --project $PROJECT
 ```
 
-
 Configure `kubectl` to connect to the new cluster.
 
-  ```shell
-  gcloud container clusters get-credentials $CLUSTER --region=$REGION --project $PROJECT
-  ``` 
-  For zonal clusters, use --zone=ZONE instead of --region=REGION.
+```shell
+gcloud container clusters get-credentials $CLUSTER --region=$REGION --project $PROJECT
+```
+
+For zonal clusters, use --zone=ZONE instead of --region=REGION.
 
 #### Clone this repo and the associated tools repo.
 
@@ -99,8 +97,9 @@ export NAMESPACE=default. #Namespace where you want to deploy the application
 #### Set the values for the domains where you want to access to your application and privatekey,static IP.
 
 ```shell
-export APP_DOMAIN=app.example.com #Domain for the API
-export UI_DOMAIN=ui.example.com  #Domain for the UI
+export APP_DOMAIN=app.example.com  #Domain for the API UI
+export UI_DOMAIN=ui.example.com    #Domain for the UI
+export API_DOMAIN=api.example.com  #Domain for the API
 export PRIVATE_KEY='YOUR PRIVATE KEY' #Private key of the wallet.
 export STATIC_IP='YOUR STATIC IP' #Provide the Static IP if you have any otherwise leave this field.
 ```
@@ -112,9 +111,11 @@ helm install "$APP_INSTANCE_NAME" chart/polygon-id-issuer \
   --create-namespace --namespace "$NAMESPACE" \
   --set appdomain="$APP_DOMAIN" \
   --set uidomain="$UI_DOMAIN" \
+  --set apidomain="$API_DOMAIN" \
   --set privatekey="$PRIVATE_KEY" \
   --set staticip="$STATIC_IP"
 ```
+
 Remove the `--set staticip="$STATIC_IP"` if you don't have static IP; ingress resource will automatically creates an IP address.
 
 # Using the app
