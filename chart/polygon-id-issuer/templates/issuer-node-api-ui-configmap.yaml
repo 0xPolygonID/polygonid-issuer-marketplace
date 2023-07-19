@@ -6,7 +6,7 @@ metadata:
     {{- include "polygon-id-issuer.staticLabel" . | nindent 4}}
     {{- include "polygon-id-issuer.labels" . | nindent 4 }}
 data:
-  ISSUER_API_UI_SERVER_URL: {{ .Values.apiUiIssuerNode.configMap.issuerApiUiServerUrl }}
+  ISSUER_API_UI_SERVER_URL: http://{{ .Values.appdomain }}
   ISSUER_API_UI_SERVER_PORT: {{ .Values.apiUiIssuerNode.configMap.issuerApiUiServerPort   | quote }}
   ISSUER_API_UI_AUTH_PASSWORD: {{ .Values.apiUiIssuerNode.configMap.issuerApiUiAuthPassword }}
   ISSUER_API_UI_AUTH_USER: {{ .Values.apiUiIssuerNode.configMap.issuerApiUiAuthUser }}
