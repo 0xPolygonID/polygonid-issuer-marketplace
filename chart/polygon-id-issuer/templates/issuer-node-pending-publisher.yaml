@@ -50,7 +50,7 @@ spec:
               name: {{ .Values.pendingPublisherIssuerNode.deployment.init.did.apiconfigMapRef }}
           args: {{ .Values.pendingPublisherIssuerNode.deployment.init.did.args }}
           command: {{ .Values.pendingPublisherIssuerNode.deployment.init.did.command }}
-          volumeMounts: {{- toYaml .Values.pendingPublisherIssuerNode.deployment.did.vault.volumeMounts | nindent 10 }}            
+          volumeMounts: {{- toYaml .Values.pendingPublisherIssuerNode.deployment.init.did.volumeMounts | nindent 10 }}            
 
       containers:
         - name: {{ .Values.pendingPublisherIssuerNode.deployment.containerName }}

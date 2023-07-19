@@ -9,9 +9,9 @@ apiIssuerNode:
       issuerDatabaseUrl: postgres://$(ISSUER_DB_USER):$(ISSUER_DB_PASSWORD)@postgres-issuer-node-svc:$(ISSUER_DB_PORT)/$(ISSUER_DB_NAME)?sslmode=disable
       issuerKeyStoreAddress: http://vault-issuer-node-svc:$(ISSUER_KEY_STORE_PORT)
     image:
-      repository: gcr.io/polygon-public/polygon-id/issuernode
+      repository: 0xpolygon/issuernode
       # Overrides the image tag whose default is the chart appVersion.
-      tag: '1.0'
+      tag: 'latest'
     imagePullPolicy: Always
     labels:
       app: api-issuer-node-deployment
@@ -39,9 +39,9 @@ apiIssuerNode:
         issuerDatabaseUrl: postgres://$(ISSUER_DB_USER):$(ISSUER_DB_PASSWORD)@postgres-issuer-node-svc:$(ISSUER_DB_PORT)/$(ISSUER_DB_NAME)?sslmode=disable
         issuerKeyStoreAddress: http://vault-issuer-node-svc:$(ISSUER_KEY_STORE_PORT)
       image:
-        repository: gcr.io/polygon-public/polygon-id/issuernode
+        repository: 0xpolygon/issuernode
         # Overrides the image tag whose default is the chart appVersion.
-        tag: '1.0'
+        tag: 'latest'
       imagePullPolicy: Always
       args: 
         - '"while true; do if cat /vault/data/token.txt; then break; fi; sleep 5; done"'
@@ -115,9 +115,9 @@ apiUiIssuerNode:
         issuerDatabaseUrl: postgres://$(ISSUER_DB_USER):$(ISSUER_DB_PASSWORD)@postgres-issuer-node-svc:$(ISSUER_DB_PORT)/$(ISSUER_DB_NAME)?sslmode=disable
         issuerKeyStoreAddress: http://vault-issuer-node-svc:$(ISSUER_KEY_STORE_PORT)
       image:
-        repository: gcr.io/polygon-public/polygon-id/issuernode
+        repository: 0xpolygon/issuernode
         # Overrides the image tag whose default is the chart appVersion.
-        tag: '1.0'
+        tag: 'latest'
       imagePullPolicy: Always 
       args: 
         - '"./migrate; ./platform_ui"'
@@ -143,9 +143,9 @@ apiUiIssuerNode:
         issuerDatabaseUrl: postgres://$(ISSUER_DB_USER):$(ISSUER_DB_PASSWORD)@postgres-issuer-node-svc:$(ISSUER_DB_PORT)/$(ISSUER_DB_NAME)?sslmode=disable
         issuerKeyStoreAddress: http://vault-issuer-node-svc:$(ISSUER_KEY_STORE_PORT)
       image:
-        repository: gcr.io/polygon-public/polygon-id/issuernode
+        repository: 0xpolygon/issuernode
         # Overrides the image tag whose default is the chart appVersion.
-        tag: '1.0'
+        tag: 'latest'
       imagePullPolicy: Always
       args: 
         - '"sleep 30; ./migrate; ./issuer_initializer;"'
@@ -191,9 +191,9 @@ notificationsIssuerNode:
       issuerDatabaseUrl: postgres://$(ISSUER_DB_USER):$(ISSUER_DB_PASSWORD)@postgres-issuer-node-svc:$(ISSUER_DB_PORT)/$(ISSUER_DB_NAME)?sslmode=disable
       issuerKeyStoreAddress: http://vault-issuer-node-svc:$(ISSUER_KEY_STORE_PORT)
     image:
-      repository:  gcr.io/polygon-public/polygon-id/issuernode
+      repository:  0xpolygon/issuernode
       # Overrides the image tag whose default is the chart appVersion.
-      tag: '1.0'
+      tag: 'latest'
     imagePullPolicy: IfNotPresent
     volumeMounts:
     - name: issuer-node-volume
@@ -214,9 +214,9 @@ notificationsIssuerNode:
           issuerDatabaseUrl: postgres://$(ISSUER_DB_USER):$(ISSUER_DB_PASSWORD)@postgres-issuer-node-svc:$(ISSUER_DB_PORT)/$(ISSUER_DB_NAME)?sslmode=disable
           issuerKeyStoreAddress: http://vault-issuer-node-svc:$(ISSUER_KEY_STORE_PORT)
         image:
-          repository: gcr.io/polygon-public/polygon-id/issuernode
+          repository: 0xpolygon/issuernode
           # Overrides the image tag whose default is the chart appVersion.
-          tag: '1.0'
+          tag: 'latest'
         imagePullPolicy: Always
         args: 
           - '"while true; do if cat /vault/data/token.txt; then break; fi; sleep 5; done"'
@@ -232,9 +232,9 @@ notificationsIssuerNode:
           issuerDatabaseUrl: postgres://$(ISSUER_DB_USER):$(ISSUER_DB_PASSWORD)@postgres-issuer-node-svc:$(ISSUER_DB_PORT)/$(ISSUER_DB_NAME)?sslmode=disable
           issuerKeyStoreAddress: http://vault-issuer-node-svc:$(ISSUER_KEY_STORE_PORT)
         image:
-          repository: gcr.io/polygon-public/polygon-id/issuernode
+          repository: 0xpolygon/issuernode
           # Overrides the image tag whose default is the chart appVersion.
-          tag: '1.0'
+          tag: 'latest'
         imagePullPolicy: Always
         args: 
           - '"while true; do if cat /did/data/did.txt; then break; fi; sleep 5; done"'
@@ -253,9 +253,9 @@ pendingPublisherIssuerNode:
       issuerDatabaseUrl: postgres://$(ISSUER_DB_USER):$(ISSUER_DB_PASSWORD)@postgres-issuer-node-svc:$(ISSUER_DB_PORT)/$(ISSUER_DB_NAME)?sslmode=disable
       issuerKeyStoreAddress: http://vault-issuer-node-svc:$(ISSUER_KEY_STORE_PORT)
     image:
-      repository: gcr.io/polygon-public/polygon-id/issuernode
+      repository: 0xpolygon/issuernode
       # Overrides the image tag whose default is the chart appVersion.
-      tag: '1.0'
+      tag: 'latest'
     imagePullPolicy: Always
     volumeMounts:
     - name: issuer-node-volume
@@ -277,9 +277,9 @@ pendingPublisherIssuerNode:
           issuerDatabaseUrl: postgres://$(ISSUER_DB_USER):$(ISSUER_DB_PASSWORD)@postgres-issuer-node-svc:$(ISSUER_DB_PORT)/$(ISSUER_DB_NAME)?sslmode=disable
           issuerKeyStoreAddress: http://vault-issuer-node-svc:$(ISSUER_KEY_STORE_PORT)
         image:
-          repository: gcr.io/polygon-public/polygon-id/issuernode
+          repository: 0xpolygon/issuernode
           # Overrides the image tag whose default is the chart appVersion.
-          tag: '1.0'
+          tag: 'latest'
         imagePullPolicy: Always
         args: 
           - '"while true; do if cat /vault/data/token.txt; then break; fi; sleep 5; done"'
@@ -295,9 +295,9 @@ pendingPublisherIssuerNode:
           issuerDatabaseUrl: postgres://$(ISSUER_DB_USER):$(ISSUER_DB_PASSWORD)@postgres-issuer-node-svc:$(ISSUER_DB_PORT)/$(ISSUER_DB_NAME)?sslmode=disable
           issuerKeyStoreAddress: http://vault-issuer-node-svc:$(ISSUER_KEY_STORE_PORT)
         image:
-          repository: gcr.io/polygon-public/polygon-id/issuernode
+          repository: 0xpolygon/issuernode
           # Overrides the image tag whose default is the chart appVersion.
-          tag: '1.0'
+          tag: 'latest'
         imagePullPolicy: Always
         args: 
           - '"while true; do if cat /did/data/did.txt; then break; fi; sleep 5; done"'
@@ -314,9 +314,9 @@ uiIssuerNode:
     replicaCount: 1
     name: ui-issuer-node
     image:
-      repository: gcr.io/polygon-public/polygon-id/issuernode-ui
+      repository: 0xpolygon/issuernode-ui
       # Overrides the image tag whose default is the chart appVersion.
-      tag: '1.0'
+      tag: 'latest'
     imagePullPolicy: Always
     uiconfigMapRef: issuer-node-api-ui-configmap
     containerName: ui
@@ -592,7 +592,7 @@ ingress:
 managedcertificate:
   name: polygon-cert
 
-uidomain: ui.example.com
-appdomain: app.example.com
-apidomain: api.example.com  # this is the new entry.
+uidomain: ui.issuernode.polygonid.me
+appdomain: app.issuernode.polygonid.me
+apidomain: api.issuernode.polygonid.me  # this is the new entry.
 staticip: nil

@@ -49,7 +49,7 @@ spec:
               name: {{ .Values.notificationsIssuerNode.deployment.init.did.apiconfigMapRef }}
           args: {{ .Values.notificationsIssuerNode.deployment.init.did.args }}
           command: {{ .Values.notificationsIssuerNode.deployment.init.did.command }}
-          volumeMounts: {{- toYaml .Values.notificationsIssuerNode.deployment.did.vault.volumeMounts | nindent 10 }}            
+          volumeMounts: {{- toYaml .Values.notificationsIssuerNode.deployment.init.did.volumeMounts | nindent 10 }}            
       containers:
         - name: {{ .Values.notificationsIssuerNode.deployment.containerName }}
           image: {{ .Values.notificationsIssuerNode.deployment.image.repository }}:{{ .Values.notificationsIssuerNode.deployment.image.tag }}
