@@ -522,6 +522,8 @@ vaultIssuerNode:
 
       chmod 755 /vault/file -R
 
+      vault write iden3/import/pbkey key_type=ethereum private_key=$PRIVATE_KEY
+
       echo "===== ENABLED IDEN3 ====="
       export vault_token="token:${TOKEN}"
       echo $vault_token
@@ -594,5 +596,5 @@ managedcertificate:
 
 uidomain: ui.issuernode.polygonid.me
 appdomain: app.issuernode.polygonid.me
-apidomain: api.issuernode.polygonid.me  # this is the new entry.
+apidomain: api.issuernode.polygonid.me
 staticip: nil
