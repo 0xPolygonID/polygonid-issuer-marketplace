@@ -21,10 +21,18 @@ data:
   ISSUER_KEY_STORE_PLUGIN_IDEN3_MOUNT_PATH: {{ .Values.apiIssuerNode.configMap.issuerKeyStorePluginIden3MountPath }}
   ISSUER_REVERSE_HASH_SERVICE_ENABLED: {{ .Values.apiIssuerNode.configMap.issuerReverseHashServiceEnabled
     | quote }}
-  ISSUER_ETHEREUM_URL: {{ .Values.apiIssuerNode.configMap.issuerEthereumUrl  }}
-  ISSUER_ETHEREUM_CONTRACT_ADDRESS: {{ .Values.apiIssuerNode.configMap.issuerEthereumContractAddress
-    | quote }}
-  ISSUER_ETHEREUM_RESOLVER_PREFIX: {{ .Values.apiIssuerNode.configMap.issuerEthereumResolverPrefix }}
+  ISSUER_ETHEREUM_URL: {{ .Values.issuerEthereumUrl  }}
+  
+  {{- if eq .Values.mainnet true }}
+  ISSUER_ETHEREUM_CONTRACT_ADDRESS: 0x624ce98D2d27b20b8f8d521723Df8fC4db71D79D
+  ISSUER_ETHEREUM_RESOLVER_PREFIX: polygon:main
+  {{- else }}
+  ISSUER_ETHEREUM_CONTRACT_ADDRESS: 0x134B1BE34911E39A8397ec6289782989729807a4
+  ISSUER_ETHEREUM_RESOLVER_PREFIX: polygon:mumbai
+  {{- end }}
+
+  # TODO: DELETE 
+  # ISSUER_ETHEREUM_RESOLVER_PREFIX: {{ .Values.apiIssuerNode.configMap.issuerEthereumResolverPrefix }}
   ISSUER_ETHEREUM_DEFAULT_GAS_LIMIT: {{ .Values.apiIssuerNode.configMap.issuerEthereumDefaultGasLimit
     | quote }}
   ISSUER_ETHEREUM_CONFIRMATION_TIME_OUT: {{ .Values.apiIssuerNode.configMap.issuerEthereumConfirmationTimeOut }}

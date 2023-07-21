@@ -127,3 +127,33 @@ kubectl get ingress app-ingress -o jsonpath='{.status.loadBalancer.ingress[0].ip
 ```
 
 Add the DNS records for both the domains to the above IP.
+
+---
+
+### a New example
+
+```bash
+export APP_INSTANCE_NAME=polygon-id-issuer
+export NAMESPACE=default
+export APP_DOMAIN=app.issuernode.polygonid.me
+export UI_DOMAIN=ui.issuernode.polygonid.me
+export API_DOMAIN=api.issuernode.polygonid.me
+
+export APP_INSTANCE_NAME=polygon-id-issuer
+export NAMESPACE=default
+export MAINNET=true
+export UIPASSWORD=123456
+export ISSUERNAME=My Issuer!
+```
+
+```bash
+helm install "$APP_INSTANCE_NAME" chart/polygon-id-issuer \
+  --create-namespace --namespace "$NAMESPACE" \
+ --set appdomain="$APP_DOMAIN" \
+  --set uidomain="$UI_DOMAIN" \
+ --set apidomain="$API_DOMAIN" \
+  --set privatekey="$PRIVATE_KEY" \
+ --set mainnet="$MAINNET" \
+  --set uiPassword="$UIPASSWORD" \
+ --set issuerName="$ISSUERNAME"
+```
