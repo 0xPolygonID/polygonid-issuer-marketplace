@@ -53,29 +53,50 @@ properties:
     default: default
     x-google-marketplace:
       type: NAMESPACE
-  appdomain:
-    type: string
-    title: APP Domain Name
-    description: Domain Name for the APP
-  uidomain:
-    type: string
-    title: UI Domain Name
-    description: Domain Name for the UI
   privatekey:
     type: string
-    title: Wallet Private Key
+    title: Private Key from the Wallet
     description: Provide the private key of the wallet
     x-google-marketplace:
       type: MASKED_FIELD
   staticip:
     type: string
-    title: Reserved Static IP Name
-    description: Static IP for Ingress
+    title: The Name of the Reserved External IP
+    description: The Reserved External IP must be created within the same project as well as region as the GKE Cluster; One can use 'Global' IP instead of 'Regional' IP.
+  appdomain:
+    type: string
+    title: The App Domain Name
+    description: The Domain Name for the App
+  uidomain:
+    type: string
+    title: The UI Domain Name
+    description: The Domain Name for the UI
+  apidomain:
+    type: string
+    title: The API Domain Name
+    description: The Domain Name for the API
   ingress.enabled:
     type: boolean
     default: true
     x-google-marketplace:
       type: INGRESS_AVAILABLE
+  mainnet: 
+    type: boolean
+    default: true
+    title: Issuer Network
+    description: Ticking this box will make issuer network as Main Net, otherwise it will be Test Net.
+  uiPassword: 
+    type: string  
+    title: The password for UI
+    description: Password to access the UI
+  issuerName: 
+    type: string
+    title: Issuer Name
+    description: Provide the Name for the Issuer
+  ethereumUrl: 
+    type: string
+    title: Ethereum URL
+    description: The URL to connect Ethereum     
 
 required:
 - name
@@ -83,3 +104,8 @@ required:
 - privatekey
 - appdomain
 - uidomain
+- apidomain
+- mainnet
+- uiPassword
+- issuerName
+- ethereumUrl

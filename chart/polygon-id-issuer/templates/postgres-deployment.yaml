@@ -22,10 +22,10 @@ spec:
           image: {{ .Values.postgresIssuerNode.deployment.image.repository }}:{{ .Values.postgresIssuerNode.deployment.image.tag }}
           imagePullPolicy: {{ .Values.postgresIssuerNode.deployment.imagePullPolicy | quote}}
           ports:
-          - containerPort: {{ .Values.postgresIssuerNode.deployment.containerPort }}
+            - containerPort: {{ .Values.postgresIssuerNode.deployment.containerPort }}
           envFrom:
-          - configMapRef:
-              name: {{ .Values.postgresIssuerNode.deployment.postgresconfigMapRef }}
+            - configMapRef:
+                name: {{ .Values.postgresIssuerNode.deployment.postgresconfigMapRef }}
           volumeMounts: {{- toYaml .Values.postgresIssuerNode.deployment.volumeMounts | nindent 10 }}
       volumes:
       - name: {{ .Values.postgresIssuerNode.pvc.volumeName }}

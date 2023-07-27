@@ -35,7 +35,3 @@ spec:
     kind: Secret
   - group: v1
     kind: Service
-  - group: v1
-    kind: PersistentVolumeClaim
-  - group: networking.k8s.io
-    kind: Ingress

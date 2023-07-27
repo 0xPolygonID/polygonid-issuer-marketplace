@@ -170,7 +170,6 @@ Define custom service selectorLabels for redis
 app: {{ .Values.redisIssuerNode.service.selector }}
 {{- end }}
 
-
 {{/*
 Define custom deployment selectorLabels for vault
 */}}

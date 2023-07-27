@@ -18,38 +18,52 @@ spec:
         {{- include "polygon-id-issuer.selectorLabels" . | nindent 8 }}
     spec:
       initContainers:
-        - name: {{ .Values.apiUiIssuerNode.deployment.init.containerName }}
-          image: {{ .Values.apiUiIssuerNode.deployment.init.image.repository }}:{{ .Values.apiUiIssuerNode.deployment.init.image.tag }}
-          imagePullPolicy: {{ .Values.apiUiIssuerNode.deployment.init.imagePullPolicy | quote }}
+        - name: {{ .Values.apiUiIssuerNode.deployment.init1.containerName }}
+          image: {{ .Values.apiUiIssuerNode.deployment.init1.image.repository }}:{{ .Values.apiUiIssuerNode.deployment.init1.image.tag }}
+          imagePullPolicy: {{ .Values.apiUiIssuerNode.deployment.init1.imagePullPolicy | quote }}
           env:
-          - name: {{ include "helpers.issuer-db-url" .}}
-            value: {{ quote .Values.apiUiIssuerNode.deployment.init.env.issuerDatabaseUrl }}
-          - name: {{ include "helpers.issuer-key-store-addr" .}}
-            value: {{ quote .Values.apiUiIssuerNode.deployment.init.env.issuerKeyStoreAddress }}
+            - name: {{ include "helpers.issuer-db-url" .}}
+              value: {{ quote .Values.apiUiIssuerNode.deployment.init1.env.issuerDatabaseUrl }}
+            - name: {{ include "helpers.issuer-key-store-addr" .}}
+              value: {{ quote .Values.apiUiIssuerNode.deployment.init1.env.issuerKeyStoreAddress }}
           envFrom:
-          - configMapRef:
-              name: {{ .Values.apiUiIssuerNode.deployment.apiUi.apiconfigMapRef }}
-          - configMapRef:
-              name: {{ .Values.apiUiIssuerNode.deployment.init.apiuiconfigMapRef }}
-          args: {{ .Values.apiUiIssuerNode.deployment.init.args }}
-          command: {{ .Values.apiUiIssuerNode.deployment.init.command }}
-          volumeMounts: {{- toYaml .Values.apiUiIssuerNode.deployment.init.volumeMounts | nindent 10 }}        
+            - configMapRef:
+                name: {{ .Values.apiUiIssuerNode.deployment.init1.apiconfigMapRef }}
+          command: {{ .Values.apiUiIssuerNode.deployment.init1.command }}
+          volumeMounts: {{- toYaml .Values.apiUiIssuerNode.deployment.init1.volumeMounts | nindent 12 }}     
+        
+        - name: {{ .Values.apiUiIssuerNode.deployment.init2.containerName }}
+          image: {{ .Values.apiUiIssuerNode.deployment.init2.image.repository }}:{{ .Values.apiUiIssuerNode.deployment.init2.image.tag }}
+          imagePullPolicy: {{ .Values.apiUiIssuerNode.deployment.init2.imagePullPolicy | quote }}
+          env:
+            - name: {{ include "helpers.issuer-db-url" .}}
+              value: {{ quote .Values.apiUiIssuerNode.deployment.init1.env.issuerDatabaseUrl }}
+            - name: {{ include "helpers.issuer-key-store-addr" .}}
+              value: {{ quote .Values.apiUiIssuerNode.deployment.init1.env.issuerKeyStoreAddress }}
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.apiUiIssuerNode.deployment.init2.apiconfigMapRef }}
+            - configMapRef:
+                name: {{ .Values.apiUiIssuerNode.deployment.init2.apiuiconfigMapRef }}
+          command: {{ .Values.apiUiIssuerNode.deployment.init2.command }}
+          args: {{ .Values.apiUiIssuerNode.deployment.init2.args }}
+          volumeMounts: {{- toYaml .Values.apiUiIssuerNode.deployment.init2.volumeMounts | nindent 10 }}     
       containers:
         - name: {{ .Values.apiUiIssuerNode.deployment.apiUi.containerName }}
           image: {{ .Values.apiUiIssuerNode.deployment.apiUi.image.repository }}:{{ .Values.apiUiIssuerNode.deployment.apiUi.image.tag }}
           imagePullPolicy: {{ .Values.apiUiIssuerNode.deployment.apiUi.imagePullPolicy | quote }}
           ports:
-          - containerPort: {{ .Values.apiUiIssuerNode.deployment.apiUi.containerPort }}
+            - containerPort: {{ .Values.apiUiIssuerNode.deployment.apiUi.containerPort }}
           env:
-          - name: {{ include "helpers.issuer-db-url" .}}
-            value: {{ quote .Values.apiUiIssuerNode.deployment.apiUi.env.issuerDatabaseUrl }}
-          - name: {{ include "helpers.issuer-key-store-addr" .}}
-            value: {{ quote .Values.apiUiIssuerNode.deployment.apiUi.env.issuerKeyStoreAddress }}
+            - name: {{ include "helpers.issuer-db-url" .}}
+              value: {{ quote .Values.apiUiIssuerNode.deployment.apiUi.env.issuerDatabaseUrl }}
+            - name: {{ include "helpers.issuer-key-store-addr" .}}
+              value: {{ quote .Values.apiUiIssuerNode.deployment.apiUi.env.issuerKeyStoreAddress }}
           envFrom:
-          - configMapRef:
-              name: {{ .Values.apiUiIssuerNode.deployment.apiUi.apiconfigMapRef }}
-          - configMapRef:
-              name: {{ .Values.apiUiIssuerNode.deployment.init.apiuiconfigMapRef }}
+            - configMapRef:
+                name: {{ .Values.apiUiIssuerNode.deployment.apiUi.apiconfigMapRef }}
+            - configMapRef:
+                name: {{ .Values.apiUiIssuerNode.deployment.init.apiuiconfigMapRef }}
           args: {{ .Values.apiUiIssuerNode.deployment.apiUi.args }}
           command: {{ .Values.apiUiIssuerNode.deployment.apiUi.command }}
           livenessProbe:
@@ -61,7 +75,7 @@ spec:
                 value: {{ .Values.apiUiIssuerNode.deployment.apiUi.livenessProbe.value }}
             initialDelaySeconds: {{ .Values.apiUiIssuerNode.deployment.apiUi.livenessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.apiUiIssuerNode.deployment.apiUi.livenessProbe.periodSeconds }}
-          volumeMounts: {{- toYaml .Values.apiUiIssuerNode.deployment.apiUi.volumeMounts | nindent 10 }} 
+          volumeMounts: {{- toYaml .Values.apiUiIssuerNode.deployment.apiUi.volumeMounts | nindent 12 }} 
       volumes:
       - name: {{ .Values.apiIssuerNode.pvc.volumeName }}
         persistentVolumeClaim:

@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: app-ingress
+  name: polygon-ingress
   labels:
     {{- include "polygon-id-issuer.staticLabel" . | nindent 4 }}
     {{- include "polygon-id-issuer.labels" . | nindent 4 }}
@@ -10,9 +10,9 @@ metadata:
     {{- toYaml $.Values.ingress.annotations | nindent 4 }}
   {{- end }}
     networking.gke.io/managed-certificates: {{ .Values.managedcertificate.name }}
-  {{- if ne .Values.staticip "nil" }}
+    {{- if ne .Values.staticip "nil" }}
     kubernetes.io/ingress.global-static-ip-name: {{ .Values.staticip }}
-  {{- end }}
+    {{- end }}
 spec:
   rules:
   - host: {{ .Values.appdomain }}
@@ -27,21 +27,6 @@ spec:
               port:
                 number: {{ .servicePort }}
         {{- end }}
-  - host: {{ .Values.uidomain }}
-    http:
-      paths:
-        {{- range .Values.ingress.uihost.paths }}
-        - path: {{ .path }}
-          pathType: Prefix
-          backend:
-            service:
-              name: {{ .serviceName }}
-              port:
-                number: {{ .servicePort }}
-          {{- end }}
-
-
-  # this is the new entry.
   - host: {{ .Values.apidomain }}
     http:
       paths:
@@ -51,6 +36,18 @@ spec:
           backend:
             service:
               name: {{ .serviceName }}
+              port:
+                number: {{ .servicePort }}
+          {{- end }}
+  - host: {{ .Values.uidomain }}
+    http:
+      paths:
+        {{- range .Values.ingress.uihost.paths }}
+        - path: {{ .path }}
+          pathType: Prefix
+          backend:
+            service:
+              name: ui-issuer-node-svc
               port:
                 number: {{ .servicePort }}
           {{- end }}

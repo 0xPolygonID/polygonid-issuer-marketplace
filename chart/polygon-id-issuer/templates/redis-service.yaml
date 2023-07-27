@@ -11,5 +11,5 @@ spec:
     {{- include "polygon-id-issuer.selectorLabels" . | nindent 4 }}
   {{- with .Values.redisIssuerNode.service.ports }}
   ports: 
-    {{-  toYaml . | nindent 2 }}
+    {{-  toYaml . | nindent 4 }}
   {{- end }}

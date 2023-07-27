@@ -26,3 +26,18 @@ spec:
           envFrom:
           - configMapRef:
               name: {{ .Values.uiIssuerNode.deployment.uiconfigMapRef }}
+          readinessProbe:
+           httpGet:
+             path: /health
+             port: 80
+           initialDelaySeconds: 60
+           periodSeconds: 300
+          livenessProbe:
+           httpGet:
+             path: /health
+             port: 80
+             httpHeaders:
+             - name: Custom-Header
+               value: Awesome
+           initialDelaySeconds: 60
+           periodSeconds: 300
