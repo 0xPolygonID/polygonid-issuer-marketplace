@@ -12,7 +12,7 @@ To learn more about Polygon ID issuer, see [this](https://0xpolygonid.github.io/
 
 ## Quick install with Google Cloud Marketplace
 
-Get up and running with a few clicks! Install this RSMetrics app to a Google Kubernetes Engine cluster using Google Cloud Marketplace. Follow the [on-screen instructions](CONSOLE LINK OF PRODUCT AFETER IT GOES LIVE).
+Get up and running with a few clicks! Install this RSMetrics app to a Google Kubernetes Engine cluster using Google Cloud Marketplace. Follow the [on-screen instructions](CONSOLE LINK OF PRODUCT AFTER IT GOES LIVE).
 
 ## Command line instructions
 
@@ -91,7 +91,7 @@ Choose the instance name and namespace for the app:
 
 ```shell
 export APP_INSTANCE_NAME=polygon-id-issuer  #Sample name for the application
-export NAMESPACE=default. #Namespace where you want to deploy the application
+export NAMESPACE=default #Namespace where you want to deploy the application
 ```
 
 #### Set the values for the domains where you want to access to your application and privatekey,static IP.
@@ -102,7 +102,13 @@ export UI_DOMAIN=ui.example.com    #Domain for the UI
 export API_DOMAIN=api.example.com  #Domain for the API
 export PRIVATE_KEY='YOUR PRIVATE KEY' #Private key of the wallet.
 export STATIC_IP='YOUR STATIC IP' #Provide the Static IP if you have any otherwise leave this field.
+export UI_PASSWORD='' # Password to login the UI
+export ISSUER_NAME='YOUR DESIRED ISSUER NAME' # Provide the Issuer Name.
+export MAINNET='true' #'False' if you want to use testnet.
+export ETHEREUMURL='URL LINK OF ETHEREUM' #
+
 ```
+
 
 #### Install the helm chart
 
@@ -113,7 +119,11 @@ helm install "$APP_INSTANCE_NAME" chart/polygon-id-issuer \
   --set uidomain="$UI_DOMAIN" \
   --set apidomain="$API_DOMAIN" \
   --set privatekey="$PRIVATE_KEY" \
-  --set staticip="$STATIC_IP"
+  --set staticip="$STATIC_IP" \
+  --set issuerName="$ISSUER_NAME" \
+  --set uiPassword="$UI_PASSWORD" \
+  --set mainnet="$MAINNET" \
+  --set ethereumUrl="$ETHEREUMURL" 
 ```
 
 Remove the `--set staticip="$STATIC_IP"` if you don't have static IP; ingress resource will automatically creates an IP address.
