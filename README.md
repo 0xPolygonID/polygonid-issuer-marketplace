@@ -12,7 +12,7 @@ To learn more about Polygon ID issuer, see [this](https://0xpolygonid.github.io/
 
 ## Quick install with Google Cloud Marketplace
 
-Get up and running with a few clicks! Install this RSMetrics app to a Google Kubernetes Engine cluster using Google Cloud Marketplace. Follow the [on-screen instructions](CONSOLE LINK OF PRODUCT AFTER IT GOES LIVE).
+Get up and running with a few clicks! Install this Polygon Issuer Node app to a Google Kubernetes Engine cluster using Google Cloud Marketplace. Follow the [on-screen instructions](https://console.cloud.google.com/marketplace/product/polygon-public/polygon-id-issuer-node).
 
 ## Command line instructions
 

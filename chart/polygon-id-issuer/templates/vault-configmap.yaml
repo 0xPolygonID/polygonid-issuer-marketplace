@@ -7,5 +7,5 @@ metadata:
     {{- include "polygon-id-issuer.labels" . | nindent 4 }}
 data:
   vault.json: {{- .Values.vaultIssuerNode.configMap.vaultJson | toYaml | indent 4 }}    
-  init.sh: |
-    {{-  .Values.vaultIssuerNode.configMap.initSh | replace "\n" "\n      " }}
+  init.sh: {{ tpl .Values.vaultIssuerNode.configMap.initSh . | toYaml | indent 4}}
+  policies.hcl: {{-  .Values.vaultIssuerNode.configMap.policieshcl | toYaml | indent 4 }}

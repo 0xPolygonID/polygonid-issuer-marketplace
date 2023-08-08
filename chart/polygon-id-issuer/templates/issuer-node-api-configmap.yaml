@@ -20,7 +20,6 @@ data:
   ISSUER_KEY_STORE_PLUGIN_IDEN3_MOUNT_PATH: {{ .Values.apiIssuerNode.configMap.issuerKeyStorePluginIden3MountPath }}
   ISSUER_REVERSE_HASH_SERVICE_ENABLED: {{ .Values.apiIssuerNode.configMap.issuerReverseHashServiceEnabled | quote }}
   ISSUER_ETHEREUM_URL: {{ .Values.ethereumUrl  }}
-
   {{- if .Values.mainnet }}
   ISSUER_ETHEREUM_CONTRACT_ADDRESS: {{ .Values.apiIssuerNode.configMap.issuerEthereumContractAddressMain | quote }}
   ISSUER_ETHEREUM_RESOLVER_PREFIX: {{ .Values.apiIssuerNode.configMap.issuerEthereumResolverPrefixMain | quote }}
@@ -28,7 +27,6 @@ data:
   ISSUER_ETHEREUM_CONTRACT_ADDRESS: {{ .Values.apiIssuerNode.configMap.issuerEthereumContractAddressMumbai | quote }}
   ISSUER_ETHEREUM_RESOLVER_PREFIX: {{ .Values.apiIssuerNode.configMap.issuerEthereumResolverPrefixMumbai | quote }}
   {{- end }}
-
   ISSUER_ETHEREUM_DEFAULT_GAS_LIMIT: {{ .Values.apiIssuerNode.configMap.issuerEthereumDefaultGasLimit | quote }}
   ISSUER_ETHEREUM_CONFIRMATION_TIME_OUT: {{ .Values.apiIssuerNode.configMap.issuerEthereumConfirmationTimeOut }}
   ISSUER_ETHEREUM_CONFIRMATION_BLOCK_COUNT: {{ .Values.apiIssuerNode.configMap.issuerEthereumConfirmationBlockCount | quote }}
@@ -47,3 +45,5 @@ data:
   ISSUER_DB_PORT: {{ .Values.apiIssuerNode.configMap.issuerDbPort | quote }}
   ISSUER_DB_USER: {{ .Values.apiIssuerNode.configMap.issuerDbUser }}
   ISSUER_KEY_STORE_PORT: {{ .Values.apiIssuerNode.configMap.issuerKeyStorePort | quote }}
+  ISSUER_VAULT_USERPASS_AUTH_ENABLED: {{ .Values.apiIssuerNode.configMap.issuerVaultUserpassAuthEnabled | quote }}
+  ISSUER_VAULT_USERPASS_AUTH_PASSWORD: {{ .Values.vaultpwd | quote }}

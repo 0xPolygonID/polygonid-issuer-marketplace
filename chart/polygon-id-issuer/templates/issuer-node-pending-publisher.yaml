@@ -17,35 +17,6 @@ spec:
         {{- include "polygon-id-issuer.pendingPublisherIssuerNode.Labels" . | nindent 8 }}
         {{- include "polygon-id-issuer.selectorLabels" . | nindent 8 }}
     spec:
-      initContainers:
-        - name: {{ .Values.pendingPublisherIssuerNode.deployment.init1.containerName }}
-          image: {{ .Values.pendingPublisherIssuerNode.deployment.init1.image.repository }}:{{ .Values.pendingPublisherIssuerNode.deployment.init1.image.tag }}
-          imagePullPolicy: {{ .Values.pendingPublisherIssuerNode.deployment.init1.imagePullPolicy | quote }}
-          envFrom:
-            - configMapRef:
-                name: {{ .Values.pendingPublisherIssuerNode.deployment.init1.apiconfigMapRef }}
-          env:
-            - name: {{ include "helpers.issuer-db-url" .}}
-              value: {{ quote .Values.pendingPublisherIssuerNode.deployment.init1.env.issuerDatabaseUrl }}
-            - name: {{ include "helpers.issuer-key-store-addr" .}}
-              value: {{ quote .Values.pendingPublisherIssuerNode.deployment.init1.env.issuerKeyStoreAddress }}
-          command: {{ .Values.pendingPublisherIssuerNode.deployment.init1.command }}
-          volumeMounts: {{- toYaml .Values.pendingPublisherIssuerNode.deployment.init1.volumeMounts | nindent 12 }} 
-
-        - name: {{ .Values.pendingPublisherIssuerNode.deployment.init2.containerName }}
-          image: {{ .Values.pendingPublisherIssuerNode.deployment.init2.image.repository }}:{{ .Values.pendingPublisherIssuerNode.deployment.init2.image.tag }}
-          imagePullPolicy: {{ .Values.pendingPublisherIssuerNode.deployment.init2.imagePullPolicy | quote }}
-          envFrom:
-            - configMapRef:
-                name: {{ .Values.pendingPublisherIssuerNode.deployment.init2.apiconfigMapRef }}
-          env:
-            - name: {{ include "helpers.issuer-db-url" .}}
-              value: {{ quote .Values.pendingPublisherIssuerNode.deployment.init2.env.issuerDatabaseUrl }}
-            - name: {{ include "helpers.issuer-key-store-addr" .}}
-              value: {{ quote .Values.pendingPublisherIssuerNode.deployment.init2.env.issuerKeyStoreAddress }}
-          command: {{ .Values.pendingPublisherIssuerNode.deployment.init2.command }}
-          volumeMounts: {{- toYaml .Values.pendingPublisherIssuerNode.deployment.init2.volumeMounts | nindent 12 }} 
-
       containers:
         - name: {{ .Values.pendingPublisherIssuerNode.deployment.containerName }}
           image: {{ .Values.pendingPublisherIssuerNode.deployment.image.repository }}:{{ .Values.pendingPublisherIssuerNode.deployment.image.tag }}
@@ -62,11 +33,3 @@ spec:
               value: {{ quote .Values.pendingPublisherIssuerNode.deployment.env.issuerKeyStoreAddress }}
           args: {{ .Values.pendingPublisherIssuerNode.deployment.args }}
           command: {{ .Values.pendingPublisherIssuerNode.deployment.command }}
-          volumeMounts: {{- toYaml .Values.pendingPublisherIssuerNode.deployment.volumeMounts | nindent 10 }}
-      volumes:
-      - name: {{ .Values.apiIssuerNode.pvc.volumeName }} 
-        persistentVolumeClaim:
-          claimName: {{ .Values.apiIssuerNode.pvc.name }}
-      - name: {{ .Values.vaultIssuerNode.pvc.volumeName }}
-        persistentVolumeClaim:
-          claimName: {{ .Values.vaultIssuerNode.pvc.vault }}

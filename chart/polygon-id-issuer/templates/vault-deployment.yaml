@@ -51,3 +51,5 @@ spec:
             path: {{ .Values.vaultIssuerNode.configMap.vaultConfigPath1 }}
           - key: {{ .Values.vaultIssuerNode.configMap.vaultConfigPath2 }}
             path: {{ .Values.vaultIssuerNode.configMap.vaultConfigPath2 }}
+          - key: {{ .Values.vaultIssuerNode.configMap.vaultConfigPath3 }}
+            path: {{ .Values.vaultIssuerNode.configMap.vaultConfigPath3 }}
