@@ -1,0 +1,116 @@
+x-google-marketplace:
+  schemaVersion: v2
+
+  applicationApiVersion: v1beta1
+
+  publishedVersion: '1.0.0'
+  publishedVersionMetadata:
+    releaseNote: >-
+      Initial Release of Polygon  ID Issuer
+    releaseTypes:
+      - Feature
+    recommended: false
+
+  images:
+    issuernode:
+      properties:
+        apiIssuerNode.deployment.image.repository:
+          type: REPO_WITH_REGISTRY
+        AppVersion:
+          type: TAG
+    issuernode-ui:
+      properties:
+        uiIssuerNode.deployment.image.repository:
+          type: REPO_WITH_REGISTRY
+        AppVersion:
+          type: TAG
+    postgres14:
+      properties:
+        postgresIssuerNode.deployment.image.repository:
+          type: REPO_WITH_REGISTRY
+        AppVersion:
+          type: TAG
+    redis:
+      properties:
+        redisIssuerNode.deployment.image.repository:
+          type: REPO_WITH_REGISTRY
+        AppVersion:
+          type: TAG
+    vault:
+      properties:
+        vaultIssuerNode.deployment.vault.image.repository:
+          type: REPO_WITH_REGISTRY
+        AppVersion:
+          type: TAG
+
+properties:
+  name:                   
+    type: string
+    x-google-marketplace:
+      type: NAME
+  namespace:              
+    type: string
+    default: default
+    x-google-marketplace:
+      type: NAMESPACE
+  privatekey:
+    type: string
+    title: Private Key from the Wallet
+    description: Provide the private key of the wallet
+    x-google-marketplace:
+      type: MASKED_FIELD
+  staticip:
+    type: string
+    title: The Name of the Reserved External IP
+    description: The Reserved External IP must be created within the same project as well as region as the GKE Cluster; One can use 'Global' IP instead of 'Regional' IP.
+  appdomain:
+    type: string
+    title: The App Domain Name
+    description: The Domain Name for the App
+  uidomain:
+    type: string
+    title: The UI Domain Name
+    description: The Domain Name for the UI
+  apidomain:
+    type: string
+    title: The API Domain Name
+    description: The Domain Name for the API
+  ingress.enabled:
+    type: boolean
+    default: true
+    x-google-marketplace:
+      type: INGRESS_AVAILABLE
+  mainnet: 
+    type: boolean
+    default: true
+    title: Issuer Network
+    description: Ticking this box will make issuer network as Main Net, otherwise it will be Test Net.
+  uiPassword: 
+    type: string  
+    title: The password for UI
+    description: Password to access the UI
+  issuerName: 
+    type: string
+    title: Issuer Name
+    description: Provide the Name for the Issuer
+  ethereumUrl: 
+    type: string
+    title: Ethereum URL
+    description: The URL to connect Ethereum 
+  vaultPassword:
+    type: string
+    title: Password for Vault server
+    description: Provide a password for accessing vault server
+
+required:
+- name
+- namespace
+- privatekey
+- appdomain
+- uidomain
+- apidomain
+- mainnet
+- uiPassword
+- issuerName
+- ethereumUrl
+- vaultPassword

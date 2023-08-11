@@ -1,0 +1,33 @@
+properties:
+  privatekey:
+    type: string
+    length: 128
+    default: 456518e1eedec0dcbb850133312d4f7108b1b0b9c3eb9bf05092b13674674929
+    x-google-marketplace:
+      type: MASKED_FIELD
+  appdomain:
+    type: string
+    default: app.example.com
+  uidomain:
+    type: string
+    default: ui.example.com
+  apidomain:
+    type: string
+    default: api.example.com
+  staticip:
+    type: string
+  mainnet:
+    type: boolean
+    default: false
+  uiPassword:
+    type: string
+    default: Password
+  issuerName: 
+    type: string
+    default: test
+  ethereumUrl: 
+    type: string
+    default: https://polygon-mumbai.g.alchemy.com/v2/xaP2_t9EUM2VYDgCgMI0k9KqDyJPvZ89
+  vaultPassword:
+    type: string
+    default: sample-vault-password
