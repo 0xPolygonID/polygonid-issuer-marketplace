@@ -106,7 +106,7 @@ export UI_PASSWORD='' # Password to login the UI
 export ISSUER_NAME='YOUR DESIRED ISSUER NAME' # Provide the Issuer Name.
 export MAINNET='true' #'False' if you want to use testnet.
 export ETHEREUMURL='URL LINK OF ETHEREUM' #
-
+export VAULT_PASSWORD="PASSWORD TO ACCESS VAULT SEVER" #Vault password that will be used by application to access vault server
 ```
 
 
@@ -123,7 +123,8 @@ helm install "$APP_INSTANCE_NAME" chart/polygon-id-issuer \
   --set issuerName="$ISSUER_NAME" \
   --set uiPassword="$UI_PASSWORD" \
   --set mainnet="$MAINNET" \
-  --set ethereumUrl="$ETHEREUMURL" 
+  --set ethereumUrl="$ETHEREUMURL"
+  --set vaultPassword="$VAULT_PASSWORD" 
 ```
 
 Remove the `--set staticip="$STATIC_IP"` if you don't have static IP; ingress resource will automatically creates an IP address.
@@ -136,34 +137,4 @@ Retrieve IP address of both the Ingress using this command
 kubectl get ingress app-ingress -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
 ```
 
-Add the DNS records for both the domains to the above IP.
-
----
-
-### a New example
-
-```bash
-export APP_INSTANCE_NAME=polygon-id-issuer
-export NAMESPACE=default
-export APP_DOMAIN=app.issuernode.polygonid.me
-export UI_DOMAIN=ui.issuernode.polygonid.me
-export API_DOMAIN=api.issuernode.polygonid.me
-
-export APP_INSTANCE_NAME=polygon-id-issuer
-export NAMESPACE=default
-export MAINNET=true
-export UIPASSWORD=123456
-export ISSUERNAME=My Issuer!
-```
-
-```bash
-helm install "$APP_INSTANCE_NAME" chart/polygon-id-issuer \
-  --create-namespace --namespace "$NAMESPACE" \
- --set appdomain="$APP_DOMAIN" \
-  --set uidomain="$UI_DOMAIN" \
- --set apidomain="$API_DOMAIN" \
-  --set privatekey="$PRIVATE_KEY" \
- --set mainnet="$MAINNET" \
-  --set uiPassword="$UIPASSWORD" \
- --set issuerName="$ISSUERNAME"
-```
+Add the DNS records for all the domains to the above IP, if you are using staticip as parameter above you can directly map to that IP instead of retrieving from ingress.

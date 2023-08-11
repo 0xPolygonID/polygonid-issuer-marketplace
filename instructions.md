@@ -1,3 +1,5 @@
+## Instructions for creating deployer image for new release of the application
+
 The GCP project for this marketplace setup is in `polygon-public` which is under `polygon.technology` organisation.
 
 ## Tagging the new container images
@@ -52,13 +54,15 @@ Once we have value populated in the helm `values.yaml` we can use them wherever 
 We have a deployer container image which will be responsible for deploying our setup to the end users GKE clusters.
 
 Follow the below steps for building and pushing the deployer image.
-```shell # Set the registry to your project GCR repo.
+
+```
+# Set the registry to your project GCR repo.
 export REGISTRY=gcr.io/$(gcloud config get-value project | tr ':' '/')
 export APP_NAME=polygon-id
-```
 docker build --tag $REGISTRY/$APP_NAME/deployer:RELEASE_TAG .
 ```
 Push the deployer image to the GCR repo
+
 ```shell
 docker push $REGISTRY/$APP_NAME/deployer:RELEASE_TAG
 ```
