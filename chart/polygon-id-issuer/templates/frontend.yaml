@@ -4,5 +4,5 @@ metadata:
   name: polygon-frontend
 spec:
   redirectToHttps:
-    enabled: true
+    enabled: false
     responseCodeName: MOVED_PERMANENTLY_DEFAULT

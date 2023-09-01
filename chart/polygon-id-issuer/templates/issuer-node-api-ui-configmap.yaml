@@ -21,3 +21,4 @@ data:
   {{- end }}
   
   ISSUER_API_ENVIRONMENT: {{ .Values.apiUiIssuerNode.configMap.issuerApiEnvironment }}
+  ISSUER_API_CALLBACK_URL: {{ .Values.apiUiIssuerNode.configMap.issuerApiCallbackUrl }}

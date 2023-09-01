@@ -6,9 +6,9 @@ apiIssuerNode:
     init:
       containerName: init-vault-check
       image:
-        repository: gcr.io/polygon-public/polygon-id/issuernode
+        repository: 0xpolygon/issuernode
         # Overrides the image tag whose default is the chart appVersion.
-        tag: '1.0.0'
+        tag: 'cp1'
       imagePullPolicy: IfNotPresent
       env:
         issuerDatabaseUrl: postgres://$(ISSUER_DB_USER):$(ISSUER_DB_PASSWORD)@postgres-issuer-node-svc:$(ISSUER_DB_PORT)/$(ISSUER_DB_NAME)?sslmode=disable
@@ -114,10 +114,10 @@ apiUiIssuerNode:
         issuerDatabaseUrl: postgres://$(ISSUER_DB_USER):$(ISSUER_DB_PASSWORD)@postgres-issuer-node-svc:$(ISSUER_DB_PORT)/$(ISSUER_DB_NAME)?sslmode=disable
         issuerKeyStoreAddress: http://vault-issuer-node-svc:$(ISSUER_KEY_STORE_PORT)
       image:
-        repository: gcr.io/polygon-public/polygon-id/issuernode
+        repository: 0xpolygon/issuernode
         # Overrides the image tag whose default is the chart appVersion.
-        tag: '1.0.0'
-      imagePullPolicy: IfNotPresent
+        tag: 'cp1'
+      imagePullPolicy: Always
       args: 
         - '"./migrate; ./platform_ui"'
       command:  
@@ -173,8 +173,8 @@ apiUiIssuerNode:
     issuerApiUiAuthUser: user-api
     issuerApiUiSchemaCache: "false"
     issuerApiUiServerPort: "3002"
-    issuerApiUiServerUrl: https://5eaa-190-191-21-57.ngrok-free.app/issuer-admin
     issuerApiName: issuer-node-api-ui-configmap
+    issuerApiCallbackUrl: https://campaign-api.polygonid.me
   
 
 notificationsIssuerNode:
@@ -182,9 +182,9 @@ notificationsIssuerNode:
     init1:
       containerName: init-vault-check
       image:
-        repository: gcr.io/polygon-public/polygon-id/issuernode
+        repository: 0xpolygon/issuernode
         # Overrides the image tag whose default is the chart appVersion.
-        tag: '1.0.0'
+        tag: 'cp1'
       imagePullPolicy: IfNotPresent
       env:
         issuerDatabaseUrl: postgres://$(ISSUER_DB_USER):$(ISSUER_DB_PASSWORD)@postgres-issuer-node-svc:$(ISSUER_DB_PORT)/$(ISSUER_DB_NAME)?sslmode=disable
@@ -244,9 +244,9 @@ pendingPublisherIssuerNode:
       issuerDatabaseUrl: postgres://$(ISSUER_DB_USER):$(ISSUER_DB_PASSWORD)@postgres-issuer-node-svc:$(ISSUER_DB_PORT)/$(ISSUER_DB_NAME)?sslmode=disable
       issuerKeyStoreAddress: http://vault-issuer-node-svc:$(ISSUER_KEY_STORE_PORT)
     image:
-      repository: gcr.io/polygon-public/polygon-id/issuernode
+      repository: 0xpolygon/issuernode
       # Overrides the image tag whose default is the chart appVersion.
-      tag: '1.0.0'
+      tag: 'cp1'
     imagePullPolicy: IfNotPresent
     volumeMounts:
     - name: issuer-node-volume
@@ -304,7 +304,6 @@ uiIssuerNode:
     issuerUiBlockExplorerUrl: https://mumbai.polygonscan.com
     issuerUiIpfsGatewayUrl: https://ipfs.io
     issuerApiUiName: issuer-node-ui-configmap
-    issuerApiUiServerUrl: http://issuer-node.info
 
 postgresIssuerNode:
   deployment:
@@ -344,7 +343,7 @@ postgresIssuerNode:
     postgresName: postgres-secret  
   pvc:
     storageClass: standard-rwo
-    storageRequest: 5Gi
+    storageRequest: 15Gi
     accessModes: ReadWriteOnce
     volumeName: postgresdata
     postgres: postgresql-issuer-node-pvc
@@ -413,7 +412,7 @@ vaultIssuerNode:
       imagePullPolicy: IfNotPresent
   pvc:
     storageClass: standard-rwo
-    storageRequest: 250Mi
+    storageRequest: 2Gi
     accessModes: ReadWriteOnce
     volumeName: vault-volume
     vault: vault-issuer-node-pvc
@@ -552,9 +551,6 @@ ingress:
     #kubernetes.io/ingress.global-static-ip-name: polygon-ip
   apphost:
     paths:
-      - path: /v1/
-        serviceName: api-ui-issuer-node-svc
-        servicePort: 3002
       - path: /
         serviceName: api-ui-issuer-node-svc
         servicePort: 3002
@@ -566,9 +562,6 @@ ingress:
 
   apihost: 
     paths:
-      - path: /v1/
-        serviceName: api-issuer-node-svc
-        servicePort: 3001
       - path: /
         serviceName: api-issuer-node-svc
         servicePort: 3001
