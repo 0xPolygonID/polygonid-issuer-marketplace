@@ -55,7 +55,7 @@ apiIssuerNode:
     - port: 3001
       protocol: TCP
       targetPort: 3001
-    type: NodePort
+    type: ClusterIP
     selector: api-issuer-node
     labels:
       app: issuer-node
@@ -96,7 +96,7 @@ apiIssuerNode:
     issuerServerUrl: http://localhost:3001
     issuerName: issuer-node-api-configmap
     issuerVaultUserpassAuthEnabled: "true"
-    # issuerVaultUserpassAuthPassword: KSyo%A65N1IeGMUD7O1}t7mlzW{bC9vp
+
   pvc:
     storageClass: standard-rwo
     storageRequest: 250Mi
@@ -161,7 +161,7 @@ apiUiIssuerNode:
     - port: 3002
       protocol: TCP
       targetPort: 3002
-    type: NodePort
+    type: ClusterIP
     selector: api-ui-issuer-node
   configMap:
     issuerApiEnvironment: local
@@ -295,7 +295,7 @@ uiIssuerNode:
     - port: 8080
       protocol: TCP
       targetPort: 80
-    type: NodePort
+    type: ClusterIP
     selector: ui-issuer-node
   configMap:
     issuerUiAuthUsername: user-ui
