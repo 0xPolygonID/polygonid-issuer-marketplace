@@ -3,23 +3,6 @@
 # Declare variables to be passed into your templates.
 apiIssuerNode:
   deployment:
-    init:
-      containerName: init-vault-check
-      image:
-        repository: gcr.io/polygon-public/polygon-id/issuernode
-        # Overrides the image tag whose default is the chart appVersion.
-        tag: '1.0.0'
-      imagePullPolicy: IfNotPresent
-      env:
-        issuerDatabaseUrl: postgres://$(ISSUER_DB_USER):$(ISSUER_DB_PASSWORD)@postgres-issuer-node-svc:$(ISSUER_DB_PORT)/$(ISSUER_DB_NAME)?sslmode=disable
-        issuerKeyStoreAddress: http://vault-issuer-node-svc:$(ISSUER_KEY_STORE_PORT)
-      apiconfigMapRef: issuer-node-api-configmap
-      command: 
-        - '"sh", "-c", "while true; do if cat /vault/data/token.txt; then break; fi; sleep 5; done"' 
-      volumeMounts:
-        - mountPath: /vault/data
-          name: vault-volume
-
     replicaCount: 1
     name: api-issuer-node
     env:
@@ -44,18 +27,16 @@ apiIssuerNode:
       - '"./migrate; ./platform"'
     command:  
       - '"sh", "-c"' 
-    volume: vault-volume
-    claimName: vault-issuer-node-pvc
     containerPort: 3001
     containerName: api
-    mountPath: /vault/data
+
   service:
     name: api-issuer-node-svc
     ports:
     - port: 3001
       protocol: TCP
       targetPort: 3001
-    type: NodePort
+    type: ClusterIP
     selector: api-issuer-node
     labels:
       app: issuer-node
@@ -93,16 +74,8 @@ apiIssuerNode:
     issuerRedisUrl: redis://@redis-issuer-node-svc:6379/1
     issuerReverseHashServiceEnabled: "false"
     issuerServerPort: "3001"
-    issuerServerUrl: http://localhost:3001
     issuerName: issuer-node-api-configmap
     issuerVaultUserpassAuthEnabled: "true"
-    # issuerVaultUserpassAuthPassword: KSyo%A65N1IeGMUD7O1}t7mlzW{bC9vp
-  pvc:
-    storageClass: standard-rwo
-    storageRequest: 250Mi
-    accessModes: ReadWriteOnce
-    volumeName: issuer-node-volume
-    name: issuer-node-pvc
 
 apiUiIssuerNode:
   deployment:
@@ -138,7 +111,6 @@ apiUiIssuerNode:
         mountPath: /vault/data
     labels:
       app: api-ui-issuer-node-deployment
-    volume: issuer-node
 
     init:
       containerName: init-vault-check
@@ -161,7 +133,7 @@ apiUiIssuerNode:
     - port: 3002
       protocol: TCP
       targetPort: 3002
-    type: NodePort
+    type: ClusterIP
     selector: api-ui-issuer-node
   configMap:
     issuerApiEnvironment: local
@@ -173,46 +145,11 @@ apiUiIssuerNode:
     issuerApiUiAuthUser: user-api
     issuerApiUiSchemaCache: "false"
     issuerApiUiServerPort: "3002"
-    issuerApiUiServerUrl: https://5eaa-190-191-21-57.ngrok-free.app/issuer-admin
     issuerApiName: issuer-node-api-ui-configmap
   
 
 notificationsIssuerNode:
-  deployment:
-    init1:
-      containerName: init-vault-check
-      image:
-        repository: gcr.io/polygon-public/polygon-id/issuernode
-        # Overrides the image tag whose default is the chart appVersion.
-        tag: '1.0.0'
-      imagePullPolicy: IfNotPresent
-      env:
-        issuerDatabaseUrl: postgres://$(ISSUER_DB_USER):$(ISSUER_DB_PASSWORD)@postgres-issuer-node-svc:$(ISSUER_DB_PORT)/$(ISSUER_DB_NAME)?sslmode=disable
-        issuerKeyStoreAddress: http://vault-issuer-node-svc:$(ISSUER_KEY_STORE_PORT)
-      apiconfigMapRef: issuer-node-api-configmap
-      command: 
-        - '"sh", "-c", "while true; do if cat /vault/data/token.txt; then break; fi; sleep 5; done"' 
-      volumeMounts:
-      - mountPath: /vault/data
-        name: vault-volume
-    init2:
-      containerName: init-did-check
-      image:
-        repository: gcr.io/polygon-public/polygon-id/issuernode
-        # Overrides the image tag whose default is the chart appVersion.
-        tag: '1.0.0'
-      imagePullPolicy: IfNotPresent
-      env:
-        issuerDatabaseUrl: postgres://$(ISSUER_DB_USER):$(ISSUER_DB_PASSWORD)@postgres-issuer-node-svc:$(ISSUER_DB_PORT)/$(ISSUER_DB_NAME)?sslmode=disable
-        issuerKeyStoreAddress: http://vault-issuer-node-svc:$(ISSUER_KEY_STORE_PORT)
-      apiconfigMapRef: issuer-node-api-configmap
-      command: 
-        - '"sh", "-c", "while true; do if cat /did/data/did.txt; then break; fi; sleep 5; done"' 
-      volumeMounts:
-      - mountPath: /did/data
-        name: issuer-node-volume
-
-    
+  deployment:    
     replicaCount: 1
     name: notifications-issuer-node
     env:
@@ -223,11 +160,6 @@ notificationsIssuerNode:
       # Overrides the image tag whose default is the chart appVersion.
       tag: '1.0.0'
     imagePullPolicy: IfNotPresent
-    volumeMounts:
-    - name: issuer-node-volume
-      mountPath: /did/data
-    - name: vault-volume
-      mountPath: /vault/data    
     labels: 
       app: notifications-issuer-node-deployment
     containerName: notifications
@@ -295,7 +227,7 @@ uiIssuerNode:
     - port: 8080
       protocol: TCP
       targetPort: 80
-    type: NodePort
+    type: ClusterIP
     selector: ui-issuer-node
   configMap:
     issuerUiAuthUsername: user-ui
@@ -304,7 +236,7 @@ uiIssuerNode:
     issuerUiBlockExplorerUrl: https://mumbai.polygonscan.com
     issuerUiIpfsGatewayUrl: https://ipfs.io
     issuerApiUiName: issuer-node-ui-configmap
-    issuerApiUiServerUrl: http://issuer-node.info
+
 
 postgresIssuerNode:
   deployment:

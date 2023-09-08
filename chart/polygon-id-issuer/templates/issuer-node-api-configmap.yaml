@@ -7,8 +7,7 @@ metadata:
     {{- include "polygon-id-issuer.labels" . | nindent 4 }}
 data:
   ISSUER_SERVER_URL: https://{{ .Values.apidomain }}
-  ISSUER_SERVER_PORT: {{ .Values.apiIssuerNode.configMap.issuerServerPort | quote
-    }}
+  ISSUER_SERVER_PORT: {{ .Values.apiIssuerNode.configMap.issuerServerPort | quote }}
   ISSUER_NATIVE_PROOF_GENERATION_ENABLED: {{ .Values.apiIssuerNode.configMap.issuerNativeProofGenerationEnabled | quote }}
   ISSUER_PUBLISH_KEY_PATH: {{ .Values.apiIssuerNode.configMap.issuerPublishKeyPath }}
   ISSUER_ONCHAIN_CHECK_STATUS_FREQUENCY: {{ .Values.apiIssuerNode.configMap.issuerOnchainCheckStatusFrequency }}
