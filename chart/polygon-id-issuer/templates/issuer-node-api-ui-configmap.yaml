@@ -22,3 +22,12 @@ data:
   
   ISSUER_API_ENVIRONMENT: {{ .Values.apiUiIssuerNode.configMap.issuerApiEnvironment }}
   ISSUER_API_CALLBACK_URL: {{ .Values.apiUiIssuerNode.configMap.issuerApiCallbackUrl }}
+
+  ISSUER_ON_CHAIN_REVOCATION_SERVICE_ENABLED: {{ .Values.apiUiIssuerNode.configMap.issuerApiUiRevocationServiceEnabled | quote }}
+  {{- if .Values.mainnet }}
+  ISSUER_ON_CHAIN_REVOCATION_SERVICE_CHAIN_ID: {{ .Values.apiUiIssuerNode.configMap.issuerApiUiRevocationServiceChainIdMumbai | quote }}
+  ISSUER_ON_CHAIN_REVOCATION_SERVICE_SC_ADDRESS: {{ .Values.apiUiIssuerNode.configMap.issuerApiUiRevocationServiceScAddressMumbai | quote }}
+  {{- else }}
+  ISSUER_ON_CHAIN_REVOCATION_SERVICE_CHAIN_ID: {{ .Values.apiUiIssuerNode.configMap.issuerApiUiRevocationServiceChainIdMain | quote }}
+  ISSUER_ON_CHAIN_REVOCATION_SERVICE_SC_ADDRESS: {{ .Values.apiUiIssuerNode.configMap.issuerApiUiRevocationServiceScAddressMain | quote }}
+  {{- end }}

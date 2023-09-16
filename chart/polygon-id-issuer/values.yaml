@@ -144,6 +144,11 @@ apiUiIssuerNode:
     issuerApiUiServerPort: "3002"
     issuerApiName: issuer-node-api-ui-configmap
     issuerApiCallbackUrl: https://campaign-api.polygonid.me
+    issuerApiUiRevocationServiceEnabled: "true"
+    issuerApiUiRevocationServiceChainIdMumbai: "80001"
+    issuerApiUiRevocationServiceScAddressMumbai: "0x49b84b9Dd137de488924b18299De8bf46fD11469"
+    issuerApiUiRevocationServiceChainIdMain: "137"
+    issuerApiUiRevocationServiceScAddressMain: "TODO"
   
 
 notificationsIssuerNode:
