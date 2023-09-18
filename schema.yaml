@@ -83,8 +83,8 @@ properties:
   mainnet: 
     type: boolean
     default: true
-    title: Issuer Network
-    description: Ticking this box will make issuer network as Main Net, otherwise it will be Test Net.
+    title: Issuer Network Main Net
+    description: Ticking this box will make issuer network as Main Net, otherwise it will be Mumbai Net.
   uiPassword: 
     type: string  
     title: The password for UI
@@ -97,7 +97,7 @@ properties:
     type: string
     title: Ethereum URL
     description: The URL to connect Ethereum 
-  vaultPassword:
+  vaultpwd:
     type: string
     title: Password for Vault server
     description: Provide a password for accessing vault server
@@ -113,4 +113,4 @@ required:
 - uiPassword
 - issuerName
 - ethereumUrl
-- vaultPassword
+- vaultpwd

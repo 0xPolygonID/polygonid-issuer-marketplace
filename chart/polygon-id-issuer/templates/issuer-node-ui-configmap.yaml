@@ -9,8 +9,12 @@ data:
   ISSUER_API_UI_SERVER_URL: https://{{ .Values.appdomain }}
   ISSUER_UI_AUTH_PASSWORD: {{ .Values.uiPassword }}
   ISSUER_UI_AUTH_USERNAME: {{ .Values.uiIssuerNode.configMap.issuerUiAuthUsername }}
-  ISSUER_UI_BLOCK_EXPLORER_URL: {{ .Values.uiIssuerNode.configMap.issuerUiBlockExplorerUrl }}
   ISSUER_API_UI_AUTH_USER: {{ .Values.uiIssuerNode.configMap.issuerApiUiAuthUser }}
   ISSUER_API_UI_AUTH_PASSWORD: {{ .Values.uiIssuerNode.configMap.issuerApiUiAuthPassword }}
   ISSUER_API_UI_ISSUER_NAME: {{ .Values.issuerName}}
   ISSUER_UI_IPFS_GATEWAY_URL: {{ .Values.uiIssuerNode.configMap.issuerUiIpfsGatewayUrl }}
+  {{- if .Values.mainnet }}
+  ISSUER_UI_BLOCK_EXPLORER_URL: {{ .Values.uiIssuerNode.configMap.issuerUiBlockExplorerUrlMainnet }}
+  {{- else }}
+  ISSUER_UI_BLOCK_EXPLORER_URL: {{ .Values.uiIssuerNode.configMap.issuerUiBlockExplorerUrlMumbai }}
+  {{- end }}
