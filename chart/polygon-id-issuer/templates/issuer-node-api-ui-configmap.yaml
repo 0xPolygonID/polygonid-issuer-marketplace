@@ -25,9 +25,9 @@ data:
 
   ISSUER_ON_CHAIN_REVOCATION_SERVICE_ENABLED: {{ .Values.apiUiIssuerNode.configMap.issuerApiUiRevocationServiceEnabled | quote }}
   {{- if .Values.mainnet }}
-  ISSUER_ON_CHAIN_REVOCATION_SERVICE_CHAIN_ID: {{ .Values.apiUiIssuerNode.configMap.issuerApiUiRevocationServiceChainIdMumbai | quote }}
-  ISSUER_ON_CHAIN_REVOCATION_SERVICE_SC_ADDRESS: {{ .Values.apiUiIssuerNode.configMap.issuerApiUiRevocationServiceScAddressMumbai | quote }}
-  {{- else }}
   ISSUER_ON_CHAIN_REVOCATION_SERVICE_CHAIN_ID: {{ .Values.apiUiIssuerNode.configMap.issuerApiUiRevocationServiceChainIdMain | quote }}
   ISSUER_ON_CHAIN_REVOCATION_SERVICE_SC_ADDRESS: {{ .Values.apiUiIssuerNode.configMap.issuerApiUiRevocationServiceScAddressMain | quote }}
+  {{- else }}
+  ISSUER_ON_CHAIN_REVOCATION_SERVICE_CHAIN_ID: {{ .Values.apiUiIssuerNode.configMap.issuerApiUiRevocationServiceChainIdMumbai | quote }}
+  ISSUER_ON_CHAIN_REVOCATION_SERVICE_SC_ADDRESS: {{ .Values.apiUiIssuerNode.configMap.issuerApiUiRevocationServiceScAddressMumbai | quote }}
   {{- end }}

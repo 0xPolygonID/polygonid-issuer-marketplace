@@ -11,11 +11,11 @@ export APP_DOMAIN=issuer-node-api-admin-cp1.polygonid.me
 export API_DOMAIN=issuer-node-api-cp1.polygonid.me
 export UI_DOMAIN=issuer-node-cp1.polygonid.me
 export STATIC_IP=issuernode-k8s-cp1
-export MAINNET=false
+export MAINNET=true
 export ISSUER_ETHERUM_URL="https://polygon-mainnet.g.alchemy.com/v2/X2HI8cErI_6RYdUVS0SvSfCZCYDCSrzt"
 export UI_PASSWORD="polygonid"
 export ISSUER_NAME="My Issuer"
-export PRIVATE_KEY=XXXXXX
+export PRIVATE_KEY="XXX"
 export VAULT_PWD=password
 ```
 

@@ -23,9 +23,11 @@ data:
   {{- if .Values.mainnet }}
   ISSUER_ETHEREUM_CONTRACT_ADDRESS: {{ .Values.apiIssuerNode.configMap.issuerEthereumContractAddressMain | quote }}
   ISSUER_ETHEREUM_RESOLVER_PREFIX: {{ .Values.apiIssuerNode.configMap.issuerEthereumResolverPrefixMain | quote }}
+  ISSUER_API_IDENTITY_NETWORK: {{ .Values.apiIssuerNode.configMap.issuerApiNetworkMain | quote }}
   {{- else }}
   ISSUER_ETHEREUM_CONTRACT_ADDRESS: {{ .Values.apiIssuerNode.configMap.issuerEthereumContractAddressMumbai | quote }}
   ISSUER_ETHEREUM_RESOLVER_PREFIX: {{ .Values.apiIssuerNode.configMap.issuerEthereumResolverPrefixMumbai | quote }}
+  ISSUER_API_IDENTITY_NETWORK: {{ .Values.apiIssuerNode.configMap.issuerApiNetworkMumbai | quote }}
   {{- end }}
   ISSUER_ETHEREUM_DEFAULT_GAS_LIMIT: {{ .Values.apiIssuerNode.configMap.issuerEthereumDefaultGasLimit | quote }}
   ISSUER_ETHEREUM_CONFIRMATION_TIME_OUT: {{ .Values.apiIssuerNode.configMap.issuerEthereumConfirmationTimeOut }}

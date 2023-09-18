@@ -77,6 +77,8 @@ apiIssuerNode:
     issuerServerUrl: http://localhost:3001
     issuerName: issuer-node-api-configmap
     issuerVaultUserpassAuthEnabled: "true"
+    issuerApiNetworkMain: main
+    issuerApiNetworkMumbai: mumbai
 
 apiUiIssuerNode:
   deployment:
@@ -148,7 +150,7 @@ apiUiIssuerNode:
     issuerApiUiRevocationServiceChainIdMumbai: "80001"
     issuerApiUiRevocationServiceScAddressMumbai: "0x49b84b9Dd137de488924b18299De8bf46fD11469"
     issuerApiUiRevocationServiceChainIdMain: "137"
-    issuerApiUiRevocationServiceScAddressMain: "TODO"
+    issuerApiUiRevocationServiceScAddressMain: "0x80667fdB4CC6bBa3EDaE419f6BFBc129e78d2fC9"
   
 
 notificationsIssuerNode:
