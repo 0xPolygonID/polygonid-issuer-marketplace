@@ -92,7 +92,7 @@ apiUiIssuerNode:
         repository: gcr.io/polygon-public/polygon-id/issuernode
         # Overrides the image tag whose default is the chart appVersion.
         tag: '1.0.0'
-      imagePullPolicy: IfNotPresent
+      imagePullPolicy: Always
       args: 
         - '"./migrate; ./platform_ui"'
       command:  
@@ -118,7 +118,7 @@ apiUiIssuerNode:
       image:
         repository: gcr.io/polygon-public/polygon-id/issuernode
         tag: '1.0.0'
-      imagePullPolicy: IfNotPresent
+      imagePullPolicy: Always
       args: 
         - '"sleep 30; ./migrate; ./issuer_initializer;"'
       command:  
@@ -158,7 +158,7 @@ notificationsIssuerNode:
       repository:  gcr.io/polygon-public/polygon-id/issuernode
       # Overrides the image tag whose default is the chart appVersion.
       tag: '1.0.0'
-    imagePullPolicy: IfNotPresent
+    imagePullPolicy: Always
     labels: 
       app: notifications-issuer-node-deployment
     containerName: notifications
@@ -178,7 +178,7 @@ pendingPublisherIssuerNode:
       repository: gcr.io/polygon-public/polygon-id/issuernode
       # Overrides the image tag whose default is the chart appVersion.
       tag: '1.0.0'
-    imagePullPolicy: IfNotPresent
+    imagePullPolicy: Always
     labels: 
       app: pending-publisher-issuer-node-deployment
     containerName: pending-publisher
@@ -509,17 +509,9 @@ appdomain: app.example.com
 apidomain: api.example.com
 staticip: nil
 
-# privatekey: nil
-
-# mainnet: true
-# uiPassword: nil
-# issuerName: nil
-# ethereumUrl: nil
-# vaultpwd: sample-vault-password
-
-privatekey: 456518e1eedec0dcbb850133312d4f7108b1b0b9c3eb9bf05092b13674674929
-mainnet: false
-uiPassword: Password
-issuerName: polygon-issuer
-ethereumUrl: https://polygon-mumbai.g.alchemy.com/v2/xaP2_t9EUM2VYDgCgMI0k9KqDyJPvZ89
+privatekey: nil
+mainnet: true
+uiPassword: nil
+issuerName: nil
+ethereumUrl: nil
 vaultpwd: sample-vault-password
