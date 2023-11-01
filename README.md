@@ -109,7 +109,6 @@ export ETHEREUMURL='URL LINK OF ETHEREUM' #
 export VAULT_PASSWORD="PASSWORD TO ACCESS VAULT SEVER" #Vault password that will be used by application to access vault server
 ```
 
-
 #### Install the helm chart
 
 ```shell
@@ -124,7 +123,7 @@ helm install "$APP_INSTANCE_NAME" chart/polygon-id-issuer \
   --set uiPassword="$UI_PASSWORD" \
   --set mainnet="$MAINNET" \
   --set ethereumUrl="$ETHEREUMURL"
-  --set vaultPassword="$VAULT_PASSWORD" 
+  --set vaultpwd="$VAULT_PASSWORD"
 ```
 
 Remove the `--set staticip="$STATIC_IP"` if you don't have static IP; ingress resource will automatically creates an IP address.
