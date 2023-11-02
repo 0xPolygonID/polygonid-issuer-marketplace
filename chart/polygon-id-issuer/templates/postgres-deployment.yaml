@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: {{ .Values.postgresIssuerNode.deployment.name }}
   labels:
@@ -26,6 +26,9 @@ spec:
           envFrom:
             - configMapRef:
                 name: {{ .Values.postgresIssuerNode.deployment.postgresconfigMapRef }}
+          env:
+          - name: PGDATA
+            value: /var/lib/postgresql/data/pgdata
           volumeMounts: {{- toYaml .Values.postgresIssuerNode.deployment.volumeMounts | nindent 10 }}
       volumes:
       - name: {{ .Values.postgresIssuerNode.pvc.volumeName }}

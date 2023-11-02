@@ -9,9 +9,9 @@ apiIssuerNode:
       issuerDatabaseUrl: postgres://$(ISSUER_DB_USER):$(ISSUER_DB_PASSWORD)@postgres-issuer-node-svc:$(ISSUER_DB_PORT)/$(ISSUER_DB_NAME)?sslmode=disable
       issuerKeyStoreAddress: http://vault-issuer-node-svc:$(ISSUER_KEY_STORE_PORT)
     image:
-      repository: gcr.io/polygon-public/polygon-id/issuernode
+      repository: martinsaporiti/issuernode
       # Overrides the image tag whose default is the chart appVersion.
-      tag: '1.0.0'
+      tag: '2.0.0'
     imagePullPolicy: Always
     labels:
       app: api-issuer-node-deployment
@@ -76,9 +76,14 @@ apiIssuerNode:
     issuerServerUrl: http://localhost:3001
     issuerName: issuer-node-api-configmap
     issuerVaultUserpassAuthEnabled: "true"
+    issuerIpfsGatewayUrl: https://gateway.pinata.cloud
     issuerApiNetworkMain: main
     issuerApiNetworkMumbai: mumbai
-
+    issuerCredentialStatusPublishingKeyPath: pbkey
+    issuerCredentialStatusRhsChainIdMain: "137"
+    issuerCredentialStatusRhsChainIdMumbai: "80001"
+    issuerCredentialStatusOnchainTreeStoreSupportedContractsMain: "0x80667fdB4CC6bBa3EDaE419f6BFBc129e78d2fC9"
+    issuerCredentialStatusOnchainTreeStoreSupportedContractsMumbai: "0x76EB7216F2400aC18C842D8C76739F3B8E619DB9"
 apiUiIssuerNode:
   deployment:
     replicaCount: 1
@@ -89,9 +94,9 @@ apiUiIssuerNode:
         issuerDatabaseUrl: postgres://$(ISSUER_DB_USER):$(ISSUER_DB_PASSWORD)@postgres-issuer-node-svc:$(ISSUER_DB_PORT)/$(ISSUER_DB_NAME)?sslmode=disable
         issuerKeyStoreAddress: http://vault-issuer-node-svc:$(ISSUER_KEY_STORE_PORT)
       image:
-        repository: gcr.io/polygon-public/polygon-id/issuernode
+        repository: martinsaporiti/issuernode
         # Overrides the image tag whose default is the chart appVersion.
-        tag: '1.0.0'
+        tag: '2.0.0'
       imagePullPolicy: Always
       args: 
         - '"./migrate; ./platform_ui"'
@@ -116,8 +121,8 @@ apiUiIssuerNode:
         issuerDatabaseUrl: postgres://$(ISSUER_DB_USER):$(ISSUER_DB_PASSWORD)@postgres-issuer-node-svc:$(ISSUER_DB_PORT)/$(ISSUER_DB_NAME)?sslmode=disable
         issuerKeyStoreAddress: http://vault-issuer-node-svc:$(ISSUER_KEY_STORE_PORT)
       image:
-        repository: gcr.io/polygon-public/polygon-id/issuernode
-        tag: '1.0.0'
+        repository: martinsaporiti/issuernode
+        tag: '2.0.0'
       imagePullPolicy: Always
       args: 
         - '"sleep 30; ./migrate; ./issuer_initializer;"'
@@ -155,9 +160,9 @@ notificationsIssuerNode:
       issuerDatabaseUrl: postgres://$(ISSUER_DB_USER):$(ISSUER_DB_PASSWORD)@postgres-issuer-node-svc:$(ISSUER_DB_PORT)/$(ISSUER_DB_NAME)?sslmode=disable
       issuerKeyStoreAddress: http://vault-issuer-node-svc:$(ISSUER_KEY_STORE_PORT)
     image:
-      repository:  gcr.io/polygon-public/polygon-id/issuernode
+      repository:  martinsaporiti/issuernode
       # Overrides the image tag whose default is the chart appVersion.
-      tag: '1.0.0'
+      tag: '2.0.0'
     imagePullPolicy: Always
     labels: 
       app: notifications-issuer-node-deployment
@@ -175,9 +180,9 @@ pendingPublisherIssuerNode:
       issuerDatabaseUrl: postgres://$(ISSUER_DB_USER):$(ISSUER_DB_PASSWORD)@postgres-issuer-node-svc:$(ISSUER_DB_PORT)/$(ISSUER_DB_NAME)?sslmode=disable
       issuerKeyStoreAddress: http://vault-issuer-node-svc:$(ISSUER_KEY_STORE_PORT)
     image:
-      repository: gcr.io/polygon-public/polygon-id/issuernode
+      repository: martinsaporiti/issuernode
       # Overrides the image tag whose default is the chart appVersion.
-      tag: '1.0.0'
+      tag: '2.0.0'
     imagePullPolicy: Always
     labels: 
       app: pending-publisher-issuer-node-deployment
@@ -193,9 +198,8 @@ uiIssuerNode:
     replicaCount: 1
     name: ui-issuer-node
     image:
-      repository: gcr.io/polygon-public/polygon-id/issuernode-ui
-      # Overrides the image tag whose default is the chart appVersion.
-      tag: '1.0.0'
+      repository: martinsaporiti/issuernodeui
+      tag: '2.0.0'
     imagePullPolicy: Always
     uiconfigMapRef: issuer-node-ui-configmap
     containerName: ui
@@ -244,7 +248,7 @@ postgresIssuerNode:
     imagePullPolicy: IfNotPresent
     volumeMounts:
     - name: postgresdata
-      mountPath: /var/lib/postgresql/polygon
+      mountPath: /var/lib/postgresql/data
     - name: postgres-initdb
       mountPath: /docker-entrypoint-initdb.d
       #readOnly: true
@@ -515,3 +519,6 @@ uiPassword: nil
 issuerName: nil
 ethereumUrl: nil
 vaultpwd: sample-vault-password
+issuerKeyType: BJJ
+rhsUrl: nil
+rhsMode: None
