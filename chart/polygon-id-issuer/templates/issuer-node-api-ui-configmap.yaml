@@ -21,4 +21,4 @@ data:
   {{- end }}
   
   ISSUER_API_ENVIRONMENT: {{ .Values.apiUiIssuerNode.configMap.issuerApiEnvironment }}
-  ISSUER_API_KEY_TYPE: {{ .Values.issuerKeyType }}
+  ISSUER_API_UI_KEY_TYPE: {{ .Values.issuerKeyType }}
