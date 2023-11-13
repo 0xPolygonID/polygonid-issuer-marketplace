@@ -56,4 +56,4 @@ data:
   ISSUER_CREDENTIAL_STATUS_PUBLISHING_KEY_PATH : {{ .Values.apiIssuerNode.configMap.issuerCredentialStatusPublishingKeyPath | quote }}
   ISSUER_CREDENTIAL_STATUS_RHS_URL : {{ .Values.rhsUrl | quote}}
   ISSUER_CREDENTIAL_STATUS_RHS_MODE : {{ .Values.rhsMode | quote }}
-  ISSUER_IPFS_GATEWAY_URL=https: {{ .Values.apiIssuerNode.configMap.issuerIpfsGatewayUrl | quote }}
+  ISSUER_IPFS_GATEWAY_URL: {{ .Values.apiIssuerNode.configMap.issuerIpfsGatewayUrl | quote }}
