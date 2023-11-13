@@ -9,9 +9,9 @@ apiIssuerNode:
       issuerDatabaseUrl: postgres://$(ISSUER_DB_USER):$(ISSUER_DB_PASSWORD)@postgres-issuer-node-svc:$(ISSUER_DB_PORT)/$(ISSUER_DB_NAME)?sslmode=disable
       issuerKeyStoreAddress: http://vault-issuer-node-svc:$(ISSUER_KEY_STORE_PORT)
     image:
-      repository: martinsaporiti/issuernode
+      repository: gcr.io/polygon-public/polygon-id/issuernode
       # Overrides the image tag whose default is the chart appVersion.
-      tag: '2.0.0'
+      tag: '1.0.0'
     imagePullPolicy: Always
     labels:
       app: api-issuer-node-deployment
@@ -94,9 +94,9 @@ apiUiIssuerNode:
         issuerDatabaseUrl: postgres://$(ISSUER_DB_USER):$(ISSUER_DB_PASSWORD)@postgres-issuer-node-svc:$(ISSUER_DB_PORT)/$(ISSUER_DB_NAME)?sslmode=disable
         issuerKeyStoreAddress: http://vault-issuer-node-svc:$(ISSUER_KEY_STORE_PORT)
       image:
-        repository: martinsaporiti/issuernode
+        repository: gcr.io/polygon-public/polygon-id/issuernode
         # Overrides the image tag whose default is the chart appVersion.
-        tag: '2.0.0'
+        tag: '1.0.0'
       imagePullPolicy: Always
       args: 
         - '"./migrate; ./platform_ui"'
@@ -121,8 +121,9 @@ apiUiIssuerNode:
         issuerDatabaseUrl: postgres://$(ISSUER_DB_USER):$(ISSUER_DB_PASSWORD)@postgres-issuer-node-svc:$(ISSUER_DB_PORT)/$(ISSUER_DB_NAME)?sslmode=disable
         issuerKeyStoreAddress: http://vault-issuer-node-svc:$(ISSUER_KEY_STORE_PORT)
       image:
-        repository: martinsaporiti/issuernode
-        tag: '2.0.0'
+        repository: gcr.io/polygon-public/polygon-id/issuernode
+        # Overrides the image tag whose default is the chart appVersion.
+        tag: '1.0.0'
       imagePullPolicy: Always
       args: 
         - '"sleep 30; ./migrate; ./issuer_initializer;"'
@@ -160,9 +161,9 @@ notificationsIssuerNode:
       issuerDatabaseUrl: postgres://$(ISSUER_DB_USER):$(ISSUER_DB_PASSWORD)@postgres-issuer-node-svc:$(ISSUER_DB_PORT)/$(ISSUER_DB_NAME)?sslmode=disable
       issuerKeyStoreAddress: http://vault-issuer-node-svc:$(ISSUER_KEY_STORE_PORT)
     image:
-      repository:  martinsaporiti/issuernode
+      repository: gcr.io/polygon-public/polygon-id/issuernode
       # Overrides the image tag whose default is the chart appVersion.
-      tag: '2.0.0'
+      tag: '1.0.0'
     imagePullPolicy: Always
     labels: 
       app: notifications-issuer-node-deployment
@@ -180,9 +181,9 @@ pendingPublisherIssuerNode:
       issuerDatabaseUrl: postgres://$(ISSUER_DB_USER):$(ISSUER_DB_PASSWORD)@postgres-issuer-node-svc:$(ISSUER_DB_PORT)/$(ISSUER_DB_NAME)?sslmode=disable
       issuerKeyStoreAddress: http://vault-issuer-node-svc:$(ISSUER_KEY_STORE_PORT)
     image:
-      repository: martinsaporiti/issuernode
+      repository: gcr.io/polygon-public/polygon-id/issuernode
       # Overrides the image tag whose default is the chart appVersion.
-      tag: '2.0.0'
+      tag: '1.0.0'
     imagePullPolicy: Always
     labels: 
       app: pending-publisher-issuer-node-deployment
@@ -198,8 +199,9 @@ uiIssuerNode:
     replicaCount: 1
     name: ui-issuer-node
     image:
-      repository: martinsaporiti/issuernodeui
-      tag: '2.0.0'
+      repository: gcr.io/polygon-public/polygon-id/issuernode-ui
+      # Overrides the image tag whose default is the chart appVersion.
+      tag: '1.0.0'
     imagePullPolicy: Always
     uiconfigMapRef: issuer-node-ui-configmap
     containerName: ui
