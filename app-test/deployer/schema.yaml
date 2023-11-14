@@ -39,4 +39,4 @@ properties:
     default: https://rhs-staging.polygonid.me/
   rhsMode:
     type: string
-    default: Offchain
+    default: None
