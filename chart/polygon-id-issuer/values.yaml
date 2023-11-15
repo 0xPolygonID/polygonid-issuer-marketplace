@@ -82,7 +82,7 @@ apiIssuerNode:
     issuerCredentialStatusPublishingKeyPath: pbkey
     issuerCredentialStatusRhsChainIdMain: "137"
     issuerCredentialStatusRhsChainIdMumbai: "80001"
-    issuerCredentialStatusOnchainTreeStoreSupportedContractsMain: "0xF5d22B2385D8cA41A649df53AE010F7b4e776dB0"
+    issuerCredentialStatusOnchainTreeStoreSupportedContractsMain: "0x80667fdB4CC6bBa3EDaE419f6BFBc129e78d2fC9"
     issuerCredentialStatusOnchainTreeStoreSupportedContractsMumbai: "0x76EB7216F2400aC18C842D8C76739F3B8E619DB9"
 apiUiIssuerNode:
   deployment:
