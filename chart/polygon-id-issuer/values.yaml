@@ -9,9 +9,8 @@ apiIssuerNode:
       issuerDatabaseUrl: postgres://$(ISSUER_DB_USER):$(ISSUER_DB_PASSWORD)@postgres-issuer-node-svc:$(ISSUER_DB_PORT)/$(ISSUER_DB_NAME)?sslmode=disable
       issuerKeyStoreAddress: http://vault-issuer-node-svc:$(ISSUER_KEY_STORE_PORT)
     image:
-      repository: gcr.io/polygon-public/polygon-id/issuernode
-      # Overrides the image tag whose default is the chart appVersion.
-      tag: '1.0.0'
+      repository: 0xpolygon/issuernode
+      tag: 'cp1_2'
     imagePullPolicy: Always
     labels:
       app: api-issuer-node-deployment
@@ -91,8 +90,7 @@ apiUiIssuerNode:
         issuerKeyStoreAddress: http://vault-issuer-node-svc:$(ISSUER_KEY_STORE_PORT)
       image:
         repository: 0xpolygon/issuernode
-        # Overrides the image tag whose default is the chart appVersion.
-        tag: 'cp1'
+        tag: 'cp1_2'
       imagePullPolicy: Always
       args: 
         - '"./migrate; ./platform_ui"'
@@ -117,9 +115,9 @@ apiUiIssuerNode:
         issuerDatabaseUrl: postgres://$(ISSUER_DB_USER):$(ISSUER_DB_PASSWORD)@postgres-issuer-node-svc:$(ISSUER_DB_PORT)/$(ISSUER_DB_NAME)?sslmode=disable
         issuerKeyStoreAddress: http://vault-issuer-node-svc:$(ISSUER_KEY_STORE_PORT)
       image:
-        repository: gcr.io/polygon-public/polygon-id/issuernode
-        tag: '1.0.0'
-      imagePullPolicy: IfNotPresent
+        repository: 0xpolygon/issuernode
+        tag: 'cp1_2'
+      imagePullPolicy: Always
       args: 
         - '"sleep 30; ./migrate; ./issuer_initializer;"'
       command:  
@@ -162,9 +160,8 @@ notificationsIssuerNode:
       issuerKeyStoreAddress: http://vault-issuer-node-svc:$(ISSUER_KEY_STORE_PORT)
     image:
       repository: 0xpolygon/issuernode
-      # Overrides the image tag whose default is the chart appVersion.
-      tag: 'cp1'
-    imagePullPolicy: IfNotPresent
+      tag: 'cp1_2'
+    imagePullPolicy: Always
     labels: 
       app: notifications-issuer-node-deployment
     containerName: notifications
@@ -182,9 +179,8 @@ pendingPublisherIssuerNode:
       issuerKeyStoreAddress: http://vault-issuer-node-svc:$(ISSUER_KEY_STORE_PORT)
     image:
       repository: 0xpolygon/issuernode
-      # Overrides the image tag whose default is the chart appVersion.
-      tag: 'cp1'
-    imagePullPolicy: IfNotPresent
+      tag: 'cp1_2'
+    imagePullPolicy: Always
     labels: 
       app: pending-publisher-issuer-node-deployment
     containerName: pending-publisher
@@ -274,7 +270,7 @@ postgresIssuerNode:
     postgresUser: polygonid
     postgresName: postgres-secret  
   pvc:
-    storageClass: standard-rwo
+    storageClass: database-rwo
     storageRequest: 15Gi
     accessModes: ReadWriteOnce
     volumeName: postgresdata
@@ -508,23 +504,15 @@ ingress:
 managedcertificate:
   name: polygon-cert
 
+
+
 uidomain: ui.example.com
 appdomain: app.example.com
 apidomain: api.example.com
 staticip: nil
-
-# privatekey: nil
-
-# mainnet: true
-# uiPassword: nil
-# issuerName: nil
-# ethereumUrl: nil
-# vaultpwd: sample-vault-password
-
-privatekey: 456518e1eedec0dcbb850133312d4f7108b1b0b9c3eb9bf05092b13674674929
-
-mainnet: false
-uiPassword: Password
-issuerName: polygon-issuer
-ethereumUrl: https://polygon-mumbai.g.alchemy.com/v2/xaP2_t9EUM2VYDgCgMI0k9KqDyJPvZ89
+mainnet: true
+uiPassword: nil
+issuerName: nil
+ethereumUrl: nil
 vaultpwd: sample-vault-password
+privatekey: nil
