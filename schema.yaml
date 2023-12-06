@@ -101,6 +101,18 @@ properties:
     type: string
     title: Password for Vault server
     description: Provide a password for accessing vault server
+  issuerKeyType:
+    type: string
+    title: Key type for Issuer Identity
+    description: Provide a key type for Issuer Identity, BJJ or ETH. Default is BJJ.
+  rhsMode:
+    type: string
+    title: Mode for Reverse Hash Service
+    description: Provide a mode for Reverse Hash Service, None, Offchain or Onchain. Default is None.
+  rhsUrl:
+    type: string
+    title: URL for RHS
+    description: Provide a URL for RHS. This is required for Offchain mode.
 
 required:
 - name

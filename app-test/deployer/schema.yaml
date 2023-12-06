@@ -31,3 +31,12 @@ properties:
   vaultpwd:
     type: string
     default: sample-vault-password
+  issuerKeyType:
+    type: string
+    default: BJJ
+  rhsUrl:
+    type: string
+    default: https://rhs-staging.polygonid.me/
+  rhsMode:
+    type: string
+    default: None

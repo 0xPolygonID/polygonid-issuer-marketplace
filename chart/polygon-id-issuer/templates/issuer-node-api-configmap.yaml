@@ -23,11 +23,15 @@ data:
   {{- if .Values.mainnet }}
   ISSUER_ETHEREUM_CONTRACT_ADDRESS: {{ .Values.apiIssuerNode.configMap.issuerEthereumContractAddressMain | quote }}
   ISSUER_ETHEREUM_RESOLVER_PREFIX: {{ .Values.apiIssuerNode.configMap.issuerEthereumResolverPrefixMain | quote }}
+  ISSUER_CREDENTIAL_STATUS_RHS_CHAIN_ID: {{ .Values.apiIssuerNode.configMap.issuerCredentialStatusRhsChainIdMain | quote }}
   ISSUER_API_IDENTITY_NETWORK: {{ .Values.apiIssuerNode.configMap.issuerApiNetworkMain | quote }}
+  ISSUER_CREDENTIAL_STATUS_ONCHAIN_TREE_STORE_SUPPORTED_CONTRACT: {{ .Values.apiIssuerNode.configMap.issuerCredentialStatusOnchainTreeStoreSupportedContractsMain | quote }}
   {{- else }}
   ISSUER_ETHEREUM_CONTRACT_ADDRESS: {{ .Values.apiIssuerNode.configMap.issuerEthereumContractAddressMumbai | quote }}
   ISSUER_ETHEREUM_RESOLVER_PREFIX: {{ .Values.apiIssuerNode.configMap.issuerEthereumResolverPrefixMumbai | quote }}
   ISSUER_API_IDENTITY_NETWORK: {{ .Values.apiIssuerNode.configMap.issuerApiNetworkMumbai | quote }}
+  ISSUER_CREDENTIAL_STATUS_RHS_CHAIN_ID: {{ .Values.apiIssuerNode.configMap.issuerCredentialStatusRhsChainIdMumbai | quote }}
+  ISSUER_CREDENTIAL_STATUS_ONCHAIN_TREE_STORE_SUPPORTED_CONTRACT: {{ .Values.apiIssuerNode.configMap.issuerCredentialStatusOnchainTreeStoreSupportedContractsMumbai | quote }}
   {{- end }}
   ISSUER_ETHEREUM_DEFAULT_GAS_LIMIT: {{ .Values.apiIssuerNode.configMap.issuerEthereumDefaultGasLimit | quote }}
   ISSUER_ETHEREUM_CONFIRMATION_TIME_OUT: {{ .Values.apiIssuerNode.configMap.issuerEthereumConfirmationTimeOut }}
@@ -49,3 +53,7 @@ data:
   ISSUER_KEY_STORE_PORT: {{ .Values.apiIssuerNode.configMap.issuerKeyStorePort | quote }}
   ISSUER_VAULT_USERPASS_AUTH_ENABLED: {{ .Values.apiIssuerNode.configMap.issuerVaultUserpassAuthEnabled | quote }}
   ISSUER_VAULT_USERPASS_AUTH_PASSWORD: {{ .Values.vaultpwd | quote }}
+  ISSUER_CREDENTIAL_STATUS_PUBLISHING_KEY_PATH : {{ .Values.apiIssuerNode.configMap.issuerCredentialStatusPublishingKeyPath | quote }}
+  ISSUER_CREDENTIAL_STATUS_RHS_URL : {{ .Values.rhsUrl | quote}}
+  ISSUER_CREDENTIAL_STATUS_RHS_MODE : {{ .Values.rhsMode | quote }}
+  ISSUER_IPFS_GATEWAY_URL: {{ .Values.apiIssuerNode.configMap.issuerIpfsGatewayUrl | quote }}
