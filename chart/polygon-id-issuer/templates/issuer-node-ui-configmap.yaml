@@ -16,5 +16,5 @@ data:
   {{- if .Values.mainnet }}
   ISSUER_UI_BLOCK_EXPLORER_URL: {{ .Values.uiIssuerNode.configMap.issuerUiBlockExplorerUrlMainnet }}
   {{- else }}
-  ISSUER_UI_BLOCK_EXPLORER_URL: {{ .Values.uiIssuerNode.configMap.issuerUiBlockExplorerUrlMumbai }}
+  ISSUER_UI_BLOCK_EXPLORER_URL: {{ .Values.uiIssuerNode.configMap.issuerUiBlockExplorerUrlAmoy }}
   {{- end }}

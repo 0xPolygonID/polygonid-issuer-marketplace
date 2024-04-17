@@ -82,9 +82,9 @@ properties:
       type: INGRESS_AVAILABLE
   mainnet: 
     type: boolean
-    default: true
+    default: false
     title: Issuer Network Main Net
-    description: Ticking this box will make issuer network as Main Net, otherwise it will be Mumbai Net.
+    description: Ticking this box will make issuer network as Main Net, otherwise it will be Amoy Net.
   uiPassword: 
     type: string  
     title: The password for UI

@@ -49,13 +49,13 @@ apiIssuerNode:
     issuerDbUser: polygonid
     issuerEthereumConfirmationBlockCount: "10"
     issuerEthereumConfirmationTimeOut: 10s
-    issuerEthereumContractAddressMumbai: "0x134B1BE34911E39A8397ec6289782989729807a4"
+    issuerEthereumContractAddressAmoy: "0x1a4cC30f2aA0377b0c3bc9848766D90cb4404124"
     issuerEthereumContractAddressMain: "0x624ce98D2d27b20b8f8d521723Df8fC4db71D79D"
     issuerEthereumDefaultGasLimit: "600000"
     issuerEthereumMaxGasPrice: "1000000"
     issuerEthereumMinGasPrice: "0"
     issuerEthereumReceiptTimeout: 600s
-    issuerEthereumResolverPrefixMumbai: polygon:mumbai
+    issuerEthereumResolverPrefixAmoy: polygon:amoy
     issuerEthereumResolverPrefixMain: polygon:main
     issuerEthereumRpcResponseTimeout: 5s
     issuerEthereumWaitBlockCycleTime: 30s
@@ -78,12 +78,12 @@ apiIssuerNode:
     issuerVaultUserpassAuthEnabled: "true"
     issuerIpfsGatewayUrl: https://gateway.pinata.cloud
     issuerApiNetworkMain: main
-    issuerApiNetworkMumbai: mumbai
+    issuerApiNetworkAmoy: amoy
     issuerCredentialStatusPublishingKeyPath: pbkey
     issuerCredentialStatusRhsChainIdMain: "137"
-    issuerCredentialStatusRhsChainIdMumbai: "80001"
+    issuerCredentialStatusRhsChainIdAmoy: "80002"
     issuerCredentialStatusOnchainTreeStoreSupportedContractsMain: "0xF5d22B2385D8cA41A649df53AE010F7b4e776dB0"
-    issuerCredentialStatusOnchainTreeStoreSupportedContractsMumbai: "0x76EB7216F2400aC18C842D8C76739F3B8E619DB9"
+    issuerCredentialStatusOnchainTreeStoreSupportedContractsAmoy: "0x3d3763eC0a50CE1AdF83d0b5D99FBE0e3fEB43fb"
 apiUiIssuerNode:
   deployment:
     replicaCount: 1
@@ -144,7 +144,7 @@ apiUiIssuerNode:
     issuerApiIdentityBlockchain: polygon
     issuerApiIdentityMethod: polygonid
     issuerApiIdentityMainNetwork: main
-    issuerApiIdentityMumbaiNetwork: mumbai
+    issuerApiIdentityAmoyNetwork: amoy
     issuerApiUiAuthPassword: password-api
     issuerApiUiAuthUser: user-api
     issuerApiUiSchemaCache: "false"
@@ -233,7 +233,7 @@ uiIssuerNode:
     issuerUiAuthUsername: user-ui
     issuerApiUiAuthPassword: password-api
     issuerApiUiAuthUser: user-api
-    issuerUiBlockExplorerUrlMumbai: https://mumbai.polygonscan.com
+    issuerUiBlockExplorerUrlAmoy: https://www.oklink.com/es-la/amoy
     issuerUiBlockExplorerUrlMainnet: https://polygonscan.com
     issuerUiIpfsGatewayUrl: https://ipfs.io
     issuerApiUiName: issuer-node-ui-configmap
