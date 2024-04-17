@@ -27,11 +27,11 @@ data:
   ISSUER_API_IDENTITY_NETWORK: {{ .Values.apiIssuerNode.configMap.issuerApiNetworkMain | quote }}
   ISSUER_CREDENTIAL_STATUS_ONCHAIN_TREE_STORE_SUPPORTED_CONTRACT: {{ .Values.apiIssuerNode.configMap.issuerCredentialStatusOnchainTreeStoreSupportedContractsMain | quote }}
   {{- else }}
-  ISSUER_ETHEREUM_CONTRACT_ADDRESS: {{ .Values.apiIssuerNode.configMap.issuerEthereumContractAddressMumbai | quote }}
-  ISSUER_ETHEREUM_RESOLVER_PREFIX: {{ .Values.apiIssuerNode.configMap.issuerEthereumResolverPrefixMumbai | quote }}
-  ISSUER_API_IDENTITY_NETWORK: {{ .Values.apiIssuerNode.configMap.issuerApiNetworkMumbai | quote }}
-  ISSUER_CREDENTIAL_STATUS_RHS_CHAIN_ID: {{ .Values.apiIssuerNode.configMap.issuerCredentialStatusRhsChainIdMumbai | quote }}
-  ISSUER_CREDENTIAL_STATUS_ONCHAIN_TREE_STORE_SUPPORTED_CONTRACT: {{ .Values.apiIssuerNode.configMap.issuerCredentialStatusOnchainTreeStoreSupportedContractsMumbai | quote }}
+  ISSUER_ETHEREUM_CONTRACT_ADDRESS: {{ .Values.apiIssuerNode.configMap.issuerEthereumContractAddressAmoy | quote }}
+  ISSUER_ETHEREUM_RESOLVER_PREFIX: {{ .Values.apiIssuerNode.configMap.issuerEthereumResolverPrefixAmoy | quote }}
+  ISSUER_API_IDENTITY_NETWORK: {{ .Values.apiIssuerNode.configMap.issuerApiNetworkAmoy | quote }}
+  ISSUER_CREDENTIAL_STATUS_RHS_CHAIN_ID: {{ .Values.apiIssuerNode.configMap.issuerCredentialStatusRhsChainIdAmoy | quote }}
+  ISSUER_CREDENTIAL_STATUS_ONCHAIN_TREE_STORE_SUPPORTED_CONTRACT: {{ .Values.apiIssuerNode.configMap.issuerCredentialStatusOnchainTreeStoreSupportedContractsAmoy | quote }}
   {{- end }}
   ISSUER_ETHEREUM_DEFAULT_GAS_LIMIT: {{ .Values.apiIssuerNode.configMap.issuerEthereumDefaultGasLimit | quote }}
   ISSUER_ETHEREUM_CONFIRMATION_TIME_OUT: {{ .Values.apiIssuerNode.configMap.issuerEthereumConfirmationTimeOut }}

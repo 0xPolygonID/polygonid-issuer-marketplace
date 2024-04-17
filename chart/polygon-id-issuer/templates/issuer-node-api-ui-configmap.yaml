@@ -17,7 +17,7 @@ data:
   {{- if .Values.mainnet }}
   ISSUER_API_IDENTITY_NETWORK: {{ .Values.apiUiIssuerNode.configMap.issuerApiIdentityMainNetwork }}
   {{- else }}
-  ISSUER_API_IDENTITY_NETWORK: {{ .Values.apiUiIssuerNode.configMap.issuerApiIdentityMumbaiNetwork }}
+  ISSUER_API_IDENTITY_NETWORK: {{ .Values.apiUiIssuerNode.configMap.issuerApiIdentityAmoyNetwork }}
   {{- end }}
   
   ISSUER_API_ENVIRONMENT: {{ .Values.apiUiIssuerNode.configMap.issuerApiEnvironment }}
