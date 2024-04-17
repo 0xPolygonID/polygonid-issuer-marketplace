@@ -97,19 +97,18 @@ export NAMESPACE=default #Namespace where you want to deploy the application
 #### Set the values for the domains where you want to access to your application and privatekey,static IP.
 
 ```shell
-export APP_DOMAIN=app.example.com  #Domain for the API UI
-export UI_DOMAIN=ui.example.com    #Domain for the UI
-export API_DOMAIN=api.example.com  #Domain for the API
-export PRIVATE_KEY='YOUR PRIVATE KEY' #Private key of the wallet.
-export STATIC_IP='YOUR STATIC IP' #Provide the Static IP if you have any otherwise leave this field.
-export UI_PASSWORD='' # Password to login the UI
-export ISSUER_NAME='YOUR DESIRED ISSUER NAME' # Provide the Issuer Name.
-export MAINNET='true' #'False' if you want to use testnet.
-export ETHEREUMURL='URL LINK OF ETHEREUM' #
-export VAULT_PASSWORD="PASSWORD TO ACCESS VAULT SEVER" #Vault password that will be used by application to access vault server
-
-export RHSMODE= None | OnChain | OffChain
-export RHSURL= https://rhs-staging.polygonid.me/            # Reuired if RHSMODE is OffChain
+export APP_DOMAIN=app.example.com                       # Domain for the API UI
+export UI_DOMAIN=ui.example.com                         # Domain for the UI
+export API_DOMAIN=api.example.com                       # Domain for the API
+export PRIVATE_KEY='YOUR PRIVATE KEY'                   # Private key of the wallet.
+export STATIC_IP='YOUR STATIC IP'                       # Provide the Static IP if you have any otherwise leave this field.
+export UI_PASSWORD='ui password'                        # Password to login the UI
+export ISSUER_NAME='YOUR DESIRED ISSUER NAME'           # Provide the Issuer Name.
+export MAINNET='true'                                   #'False' if you want to use testnet.
+export ETHEREUMURL='URL LINK OF BLOCKCHAIN NETWORK'
+export VAULT_PASSWORD="PASSWORD TO ACCESS VAULT SEVER"  # Vault password that will be used by application to access vault server
+export RHSMODE="None"                                   # None| OnChain | OffChain
+export RHSURL="https://rhs-staging.polygonid.me/"       # Reuired if RHSMODE is OffChain
 ```
 
 Remove the `--set staticip="$STATIC_IP"` if you don't have static IP; ingress resource will automatically creates an IP address.
